@@ -1,0 +1,6 @@
+{
+  "name": "HNKMSM-EOTC-LV-NV",
+  "description": "HNKMSM-EOTC-LV-NV Ethiopian Orthodox Tewahedo Church community platform",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

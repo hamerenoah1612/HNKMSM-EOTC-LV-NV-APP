@@ -1,0 +1,259 @@
+/* ==========================================================================
+   Upgrade layer — loaded AFTER styles.css (which is unchanged).
+   Uses the same Warm Earth tokens; adds the photographic imagery and the
+   layout refinements from the design mockup.
+   ========================================================================== */
+
+/* Brown-tint for emoji/glyph icons so they sit inside the warm palette */
+.glyph{display:inline-block;filter:sepia(1) saturate(1.25) brightness(.66) contrast(1.05)}
+.btn{white-space:nowrap}
+
+/* ---------- Hero background imagery ---------- */
+.hero-grid{position:relative;z-index:1}
+.hero-art{position:absolute;pointer-events:none;user-select:none;max-width:none}
+.hero-art-layer{position:absolute;inset:0;left:50%;transform:translateX(-50%);z-index:0;pointer-events:none;margin-inline:0}
+
+.hero-art--church{
+  left:20%;top:34px;height:min(78%,400px);width:auto;
+  mix-blend-mode:multiply;opacity:.85;
+  -webkit-mask-image:linear-gradient(to bottom,#000 58%,transparent 100%),linear-gradient(to right,transparent 0,#000 22%,#000 78%,transparent 100%);
+  -webkit-mask-composite:source-in;
+  mask-image:linear-gradient(to bottom,#000 58%,transparent 100%),linear-gradient(to right,transparent 0,#000 22%,#000 78%,transparent 100%);
+  mask-composite:intersect;
+}
+.hero-art--trees{
+  right:0;top:0;height:400px;width:auto;
+  mix-blend-mode:multiply;opacity:.75;z-index:0;
+  -webkit-mask-image:linear-gradient(to left,#000 45%,transparent 100%),linear-gradient(to bottom,#000 55%,transparent 100%);
+  -webkit-mask-composite:source-in;
+  mask-image:linear-gradient(to left,#000 45%,transparent 100%),linear-gradient(to bottom,#000 55%,transparent 100%);
+  mask-composite:intersect;
+}
+
+/* Laptop base + real avatar + phone photo */
+.desktop-device{position:relative;margin-bottom:16px}
+.desktop-device::after{
+  content:"";position:absolute;left:-4%;right:-4%;bottom:-14px;height:14px;
+  border-radius:0 0 20px 20px;background:linear-gradient(180deg,#e3e3e5,#b4b4b8);
+  box-shadow:0 14px 26px rgba(59,42,33,.2);
+}
+.avatar-dot{background-size:cover;background-position:center;border:1px solid rgba(127,85,57,.25)}
+.mobile-hero-card{position:relative;overflow:hidden;min-height:84px;justify-content:center}
+.mobile-hero-card>small,.mobile-hero-card>strong{position:relative;z-index:1}
+.mobile-hero-art{
+  position:absolute;right:0;bottom:0;height:100%;width:auto;max-width:none;
+  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 38%);
+  mask-image:linear-gradient(to right,transparent 0,#000 38%);
+}
+
+/* ---------- Sign in button ---------- */
+.nav-signin svg{flex:none}
+
+/* ---------- Role cards (Admin / Member) with photography ---------- */
+.role-card{background:linear-gradient(90deg,#fbf3ec,#fffaf6)}
+.role-media,.admin-image,.member-image{background-size:cover;background-repeat:no-repeat;background-position:center 18%}
+.member-image{background-position:center 30%}
+.role-media::after{background:linear-gradient(0deg,rgba(255,250,246,.95) 0%,rgba(255,250,246,0) 42%)}
+.role-head{display:flex;align-items:center;gap:10px;margin-bottom:2px}
+.role-head h3{margin:0}
+.role-icon{color:var(--primary);flex:none}
+.role-sub{margin:0 0 18px;color:var(--muted);font-size:.88rem}
+.role-copy ul{list-style:none;padding:0}
+.role-copy li{position:relative;padding-left:22px}
+.role-copy li::before{content:"";position:absolute;left:2px;top:.55em;width:8px;height:8px;border-radius:50%;background:var(--cocoa)}
+
+@media (min-width:700px){
+  .role-media::after{background:linear-gradient(90deg,rgba(255,250,246,0) 55%,rgba(251,243,236,.98) 100%)}
+  .role-copy{align-self:center;padding:22px 24px}
+  .role-copy li{margin-bottom:6px}
+  .role-copy ul{margin-bottom:18px}
+  .role-copy .btn{padding:0 16px}
+}
+
+/* ---------- Feature cards: icon beside copy ---------- */
+@media (min-width:700px){
+  .feature-card{display:grid;grid-template-columns:48px 1fr;column-gap:14px;align-items:start;padding:18px}
+  .feature-card .icon-bubble{grid-row:1 / span 3}
+  .feature-card h3{margin:2px 0 6px}
+  .value-row{grid-template-columns:repeat(4,auto);justify-content:start;gap:22px;max-width:none}
+}
+
+/* ---------- Giving with hands imagery ---------- */
+.giving{position:relative;overflow:hidden}
+.giving-art{
+  position:absolute;left:0;top:0;height:100%;width:min(300px,32%);max-width:none;
+  object-fit:cover;object-position:left bottom;pointer-events:none;user-select:none;opacity:.35;
+  -webkit-mask-image:linear-gradient(to right,#000 45%,transparent 100%);
+  mask-image:linear-gradient(to right,#000 45%,transparent 100%);
+}
+.giving-grid{position:relative;z-index:1}
+.giving-side{display:flex;flex-direction:column;gap:18px;min-width:0}
+.giving-quote{margin:0;max-width:none;text-align:center;font-family:Georgia,serif;font-style:italic;color:#5d4a3e;font-size:.88rem}
+.giving-quote cite{font-size:.78rem}
+.secure-note{display:inline-flex;align-items:center;gap:6px}
+
+@media (min-width:900px){
+  .giving-art{opacity:1;width:min(320px,26%)}
+  .giving-grid{grid-template-columns:.85fr 1.25fr}
+  .giving-grid{padding-left:max(0px,calc(250px - max(16px,(100vw - var(--container)) / 2)))}
+  .giving-options div{background:transparent;border:0;border-radius:0;align-items:center;text-align:center;padding:6px 10px}
+  .giving-options div+div{border-left:1px solid var(--line)}
+  .giving-options{gap:0}
+}
+
+/* ---------- Media library tiles ---------- */
+.media-grid div{background:#f8efe7}
+@media (min-width:1100px){
+  .media-wrap{grid-template-columns:.8fr 1.7fr}
+  .media-grid{grid-template-columns:repeat(7,1fr);gap:10px}
+  .media-grid div{padding:14px 8px}
+}
+
+/* ---------- CTA banner with church skyline ---------- */
+.cta-banner{position:relative;overflow:hidden}
+.cta-art{
+  position:absolute;left:0;top:0;height:100%;width:auto;max-width:70%;object-fit:cover;object-position:left center;
+  pointer-events:none;user-select:none;opacity:.3;
+  -webkit-mask-image:linear-gradient(to right,#000 50%,transparent 100%);
+  mask-image:linear-gradient(to right,#000 50%,transparent 100%);
+}
+.cta-copy,.cta-action{position:relative;z-index:1}
+.cta-tagline{margin:10px 0 0;font-size:.78rem;color:#f7eee8;text-align:center}
+@media (min-width:900px){
+  .cta-art{opacity:1}
+  .cta-banner{padding-left:clamp(230px,28%,340px)}
+  .cta-action{text-align:center}
+}
+
+/* ---------- Footer socials ---------- */
+.footer-social{display:flex;gap:14px;align-items:center;color:var(--text)}
+.footer-social a{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;transition:.18s ease}
+.footer-social a:hover{background:var(--cream);color:var(--primary)}
+
+/* ---------- Small screens ---------- */
+@media (max-width:899px){
+  .hero-art--church{left:auto;right:-30px;top:20px;height:260px;opacity:.55}
+  .hero-art--trees{height:260px;opacity:.5}
+}
+@media (max-width:520px){
+  .hero-art--trees{display:none}
+}
+
+/* ---------- Logo image ---------- */
+html{scroll-padding-top:80px}
+.brand-logo{height:44px;width:auto;flex:none;display:block}
+.brand-name{font-weight:600;font-size:1.12rem;letter-spacing:.01em}
+.footer-brand .brand-logo{height:42px}
+
+/* ---------- Header sign-in (mobile) + bottom tab bar ---------- */
+.header-signin,.mobile-nav{display:none}
+
+@media (max-width:899px){
+  .header-signin{display:inline-flex;margin-left:auto;min-height:38px;padding:0 14px;font-size:.82rem}
+  .brand-logo{height:36px}
+  .brand-name{font-size:.86rem}
+
+  .mobile-nav{
+    display:grid;grid-template-columns:repeat(6,1fr);gap:2px;
+    position:fixed;left:0;right:0;bottom:0;z-index:120;
+    padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px));
+    background:rgba(255,255,255,.96);backdrop-filter:blur(14px);
+    border-top:1px solid var(--line);box-shadow:0 -8px 24px rgba(59,42,33,.08);
+  }
+  .mobile-nav a{
+    display:flex;flex-direction:column;align-items:center;gap:3px;
+    padding:7px 2px 6px;border-radius:12px;
+    font-size:.64rem;font-weight:500;color:var(--muted);
+    transition:background .18s ease,color .18s ease;
+  }
+  .mobile-nav a.active{color:var(--primary);font-weight:700;background:var(--cream)}
+  body{padding-bottom:calc(68px + env(safe-area-inset-bottom,0px))}
+}
+@media (max-width:520px){
+  .header-inner{gap:10px}
+  .brand-name{font-size:.78rem}
+  .header-signin{padding:0 12px}
+}
+
+/* ---------- Footer objectives band (Giving-style) ---------- */
+.site-footer{padding-top:0}
+.footer-grid{padding-top:4px}
+.footer-objectives{
+  position:relative;overflow:hidden;margin-bottom:28px;padding:30px 0;
+  background:linear-gradient(135deg,#f5e8dc,#fffaf6);border-bottom:1px solid var(--line);
+}
+.objectives-art{
+  position:absolute;left:3%;top:-8%;height:175%;width:auto;max-width:none;
+  mix-blend-mode:multiply;opacity:.7;pointer-events:none;user-select:none;
+  -webkit-mask-image:linear-gradient(to bottom,#000 55%,transparent 100%),linear-gradient(to right,transparent 0,#000 25%,#000 75%,transparent 100%);
+  -webkit-mask-composite:source-in;
+  mask-image:linear-gradient(to bottom,#000 55%,transparent 100%),linear-gradient(to right,transparent 0,#000 25%,#000 75%,transparent 100%);
+  mask-composite:intersect;
+}
+.objectives-inner{position:relative;z-index:1;display:flex;flex-direction:column;gap:22px}
+.objectives-copy h2{font-family:"Playfair Display",Georgia,serif;font-size:clamp(1.5rem,3.6vw,2.1rem);line-height:1.15;margin:0 0 6px}
+.objectives-copy p{margin:0;color:var(--muted)}
+.objectives-more{align-self:flex-start}
+
+.objectives-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.objectives-grid div{
+  background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;
+  display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;
+}
+.objectives-grid strong{font-size:.82rem;color:var(--text)}
+.objectives-grid small{font-size:.68rem;color:var(--muted)}
+
+@media (min-width:560px){.objectives-grid{grid-template-columns:repeat(4,1fr)}}
+@media (min-width:900px){
+  .objectives-grid{grid-template-columns:repeat(6,1fr)}
+  .objectives-more{align-self:center}
+}
+@media (max-width:520px){
+  .objectives-inner{align-items:stretch;text-align:left}
+  .objectives-more{width:100%}
+  .objectives-art{left:auto;right:-8%;opacity:.5}
+  .objectives-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+/* ---------- Modal ---------- */
+.am{font-family:"Noto Sans Ethiopic","Nyala","Abyssinica SIL","Ebrima",system-ui,sans-serif}
+.modal-backdrop{
+  position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:16px;
+  background:rgba(59,42,33,.55);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);
+  animation:modal-fade .18s ease;
+}
+.modal{
+  width:min(860px,100%);max-height:min(88vh,88dvh);display:flex;flex-direction:column;
+  background:#fffaf6;border:1px solid var(--line);border-radius:22px;overflow:hidden;
+  box-shadow:0 30px 80px rgba(59,42,33,.35);animation:modal-pop .22s ease;
+}
+.modal-head{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 22px;
+  background:linear-gradient(135deg,#f5e8dc,#fffaf6);border-bottom:1px solid var(--line);
+}
+.modal-head h2{font-family:"Playfair Display",Georgia,serif;font-size:clamp(1.3rem,3.2vw,1.75rem);margin:0}
+.modal-close{
+  flex:none;width:42px;height:42px;display:grid;place-items:center;border-radius:50%;
+  border:1px solid var(--line);background:#fff;color:var(--primary);cursor:pointer;transition:.18s ease;
+}
+.modal-close:hover{background:var(--primary);color:#fff}
+.modal-close:focus-visible,.modal-body:focus-visible{outline:3px solid var(--caramel);outline-offset:2px}
+.modal-body{overflow-y:auto;overscroll-behavior:contain;padding:4px 22px 22px}
+.objectives-list{list-style:none;margin:0;padding:0}
+.objectives-list li{display:grid;grid-template-columns:38px 1fr;gap:14px;padding:18px 0;border-bottom:1px solid var(--line)}
+.objectives-list li:last-child{border-bottom:0}
+.obj-num{width:36px;height:36px;display:grid;place-items:center;border-radius:50%;background:var(--cream);color:var(--primary);font-weight:700;font-size:.9rem}
+.objectives-list h3{margin:2px 0 8px;font-size:1.05rem;color:var(--text)}
+.objectives-list h3 .am{color:var(--primary);font-weight:500}
+.objectives-list p{margin:0 0 6px;line-height:1.7}
+.objectives-list .obj-en{color:var(--muted);font-size:.92rem}
+
+@keyframes modal-fade{from{opacity:0}to{opacity:1}}
+@keyframes modal-pop{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.modal-backdrop,.modal{animation:none}}
+@media (max-width:520px){
+  .modal-backdrop{padding:10px}
+  .modal-body{padding:2px 16px 18px}
+  .objectives-list li{grid-template-columns:32px 1fr;gap:10px}
+  .obj-num{width:30px;height:30px;font-size:.8rem}
+}
