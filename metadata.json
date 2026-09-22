@@ -1,6 +1,6 @@
 {
-  "name": "HNKMSM-EOTC-LV-NV",
-  "description": "HNKMSM-EOTC-LV-NV Ethiopian Orthodox Tewahedo Church community platform",
+  "name": "HNKMSM EOTC LV-NV Church Portal",
+  "description": "Official member and administrative portal for Holy Name & Mary Ethiopian Orthodox Tewahedo Church (HNKMSM-EOTC-LV-NV).",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

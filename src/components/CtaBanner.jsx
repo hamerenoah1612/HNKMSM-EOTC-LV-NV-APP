@@ -1,7 +1,16 @@
 import { BRAND, PORTAL_URL, openPortal } from '../data/content.js';
 import ctaChurch from '../assets/cta-church.jpg';
 
-export default function CtaBanner() {
+export default function CtaBanner({ onSignIn }) {
+  const handleClick = (e) => {
+    if (onSignIn) {
+      e.preventDefault();
+      onSignIn('member');
+    } else {
+      openPortal(e);
+    }
+  };
+
   return (
     <section className="cta-section" id="signin">
       <div className="container cta-banner">
@@ -16,10 +25,8 @@ export default function CtaBanner() {
         <div className="cta-action">
           <a
             className="btn btn-light"
-            href={PORTAL_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={openPortal}
+            href="#signin"
+            onClick={handleClick}
           >
             Get Started Today →
           </a>

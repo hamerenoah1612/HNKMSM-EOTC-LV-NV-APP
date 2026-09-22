@@ -20,7 +20,16 @@ function ValueItem({ icon, label }) {
   );
 }
 
-export default function Hero() {
+export default function Hero({ onSignIn }) {
+  const handleGetStarted = (e) => {
+    if (onSignIn) {
+      e.preventDefault();
+      onSignIn('member');
+    } else {
+      openPortal(e);
+    }
+  };
+
   return (
     <section className="hero" id="home">
       {/* Background imagery from the design mockup */}
@@ -42,10 +51,8 @@ export default function Hero() {
           <div className="hero-actions">
             <a
               className="btn btn-primary"
-              href={PORTAL_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={openPortal}
+              href="#signin"
+              onClick={handleGetStarted}
             >
               Get Started <span aria-hidden="true">→</span>
             </a>
@@ -66,7 +73,7 @@ export default function Hero() {
           </blockquote>
         </div>
 
-        <HeroVisual />
+        <HeroVisual onSignIn={onSignIn} />
       </div>
     </section>
   );

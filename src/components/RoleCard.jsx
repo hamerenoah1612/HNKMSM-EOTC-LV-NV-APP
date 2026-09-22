@@ -6,7 +6,16 @@ import { openPortal } from '../data/content.js';
  * `image` is the photo from the design mockup, shown full-height on the left
  * and faded into the card by the CSS.
  */
-export default function RoleCard({ variant, image, icon, title, subtitle, items, cta }) {
+export default function RoleCard({ variant, image, icon, title, subtitle, items, cta, onSignIn }) {
+  const handleClick = (e) => {
+    if (onSignIn) {
+      e.preventDefault();
+      onSignIn(variant === 'admin' ? 'admin' : 'member');
+    } else {
+      openPortal(e);
+    }
+  };
+
   return (
     <article className={`role-card role-card--${variant}`}>
       <div
@@ -27,10 +36,8 @@ export default function RoleCard({ variant, image, icon, title, subtitle, items,
         </ul>
         <a
           className="btn btn-primary"
-          href={cta.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={openPortal}
+          href="#signin"
+          onClick={handleClick}
         >
           {cta.label}
         </a>

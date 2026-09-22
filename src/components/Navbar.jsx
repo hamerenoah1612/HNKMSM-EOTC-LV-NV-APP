@@ -9,8 +9,17 @@ const SECTION_IDS = NAV_LINKS.map((link) => link.id);
  * Desktop: full inline nav. Mobile (<900px): no hamburger — the header keeps
  * just the logo + Sign In, and navigation moves to the bottom MobileNav bar.
  */
-export default function Navbar() {
+export default function Navbar({ onSignIn, user, onSignOut }) {
   const active = useActiveSection(SECTION_IDS, 'home');
+
+  const handleSignInClick = (e, role = 'member') => {
+    if (onSignIn) {
+      e.preventDefault();
+      onSignIn(role);
+    } else {
+      openPortal(e);
+    }
+  };
 
   return (
     <header className="site-header">
@@ -34,26 +43,64 @@ export default function Navbar() {
               {label}
             </a>
           ))}
-          <a
-            className="btn btn-primary nav-signin"
-            href={PORTAL_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={openPortal}
-          >
-            <Icon name="user" size={16} /> Sign In
-          </a>
+          {user ? (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <button
+                type="button"
+                className="btn btn-primary nav-signin"
+                onClick={(e) => handleSignInClick(e, user.role)}
+                title="Open Church Portal"
+                style={{ cursor: 'pointer' }}
+              >
+                <Icon name="user" size={16} /> {user.name.split(' ')[0]} ({user.role})
+              </button>
+              {onSignOut && (
+                <button
+                  type="button"
+                  onClick={onSignOut}
+                  style={{
+                    background: 'transparent',
+                    border: '1px solid var(--line)',
+                    padding: '6px 10px',
+                    borderRadius: '8px',
+                    fontSize: '0.78rem',
+                    color: 'var(--muted)',
+                    cursor: 'pointer',
+                  }}
+                >
+                  Sign Out
+                </button>
+              )}
+            </div>
+          ) : (
+            <a
+              className="btn btn-primary nav-signin"
+              href="#signin"
+              onClick={(e) => handleSignInClick(e, 'member')}
+            >
+              <Icon name="user" size={16} /> Sign In
+            </a>
+          )}
         </nav>
 
-        <a
-          className="btn btn-primary header-signin"
-          href={PORTAL_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={openPortal}
-        >
-          <Icon name="user" size={15} /> Sign In
-        </a>
+        {user ? (
+          <button
+            type="button"
+            className="btn btn-primary header-signin"
+            onClick={(e) => handleSignInClick(e, user.role)}
+            style={{ cursor: 'pointer' }}
+          >
+            <Icon name="user" size={15} /> {user.name.split(' ')[0]}
+          </button>
+        ) : (
+          <a
+            className="btn btn-primary header-signin"
+            href="#signin"
+            onClick={(e) => handleSignInClick(e, 'member')}
+          >
+            <Icon name="user" size={15} /> Sign In
+          </a>
+        )}
       </div>
     </header>
   );

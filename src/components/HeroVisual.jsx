@@ -8,15 +8,22 @@ function Avatar() {
   );
 }
 
-function DesktopPreview() {
+function DesktopPreview({ onSignIn }) {
   const { sidebar, stats, events, announcements } = HERO_PREVIEW;
+
+  const handleClick = (e) => {
+    if (onSignIn) {
+      e.preventDefault();
+      onSignIn('admin');
+    } else {
+      openPortal(e);
+    }
+  };
 
   return (
     <a
-      href={PORTAL_URL}
-      target="_blank"
-      rel="noopener noreferrer"
-      onClick={openPortal}
+      href="#signin"
+      onClick={handleClick}
       className="device desktop-device"
       title="Open HNKMSM Portal"
       style={{ display: 'block', cursor: 'pointer', textDecoration: 'none' }}
@@ -79,13 +86,20 @@ function DesktopPreview() {
   );
 }
 
-function MobilePreview() {
+function MobilePreview({ onSignIn }) {
+  const handleClick = (e) => {
+    if (onSignIn) {
+      e.preventDefault();
+      onSignIn('member');
+    } else {
+      openPortal(e);
+    }
+  };
+
   return (
     <a
-      href={PORTAL_URL}
-      target="_blank"
-      rel="noopener noreferrer"
-      onClick={openPortal}
+      href="#signin"
+      onClick={handleClick}
       className="device mobile-device"
       title="Open HNKMSM Portal"
       style={{ display: 'block', cursor: 'pointer', textDecoration: 'none' }}
@@ -109,14 +123,14 @@ function MobilePreview() {
   );
 }
 
-export default function HeroVisual() {
+export default function HeroVisual({ onSignIn }) {
   return (
     <div className="hero-visual" aria-label="Member platform preview">
       <div className="decorative-cross" aria-hidden="true">
         {BRAND.mark}
       </div>
-      <DesktopPreview />
-      <MobilePreview />
+      <DesktopPreview onSignIn={onSignIn} />
+      <MobilePreview onSignIn={onSignIn} />
     </div>
   );
 }

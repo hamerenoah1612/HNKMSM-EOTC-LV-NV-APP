@@ -1,1 +1,39 @@
 @import "tailwindcss";
+
+@theme {
+  --font-cinzel: 'Cinzel', Georgia, serif;
+  --font-garamond: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-script: 'Alex Brush', cursive;
+  --font-ethiopic: 'Noto Serif Ethiopic', 'Cormorant Garamond', serif;
+}
+
+/* Feathered sacred icon mask to blend seamlessly into antique parchment background */
+.feather-mask {
+  mask-image: radial-gradient(ellipse 90% 88% at 50% 48%, black 62%, rgba(0, 0, 0, 0.7) 80%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 88% at 50% 48%, black 62%, rgba(0, 0, 0, 0.7) 80%, transparent 100%);
+}
+
+.feather-mask-bottom {
+  mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+}
+
+/* Custom scrollbar and subtle parchment aesthetic */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #ede2d3;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #be9d85;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9d755c;
+}
