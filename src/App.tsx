@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import LandingPage from './components/LandingPage.jsx';
 import { AuthPage } from './components/AuthPage';
+import MemberDashboard from './pages/MemberDashboard.jsx';
 import { UserRole, Language } from './types';
 
 export default function App() {
-  const [currentView, setCurrentView] = useState<'landing' | 'auth'>('landing');
+  const [currentView, setCurrentView] = useState<'landing' | 'auth' | 'dashboard'>('landing');
   const [authRole, setAuthRole] = useState<UserRole>('member');
   const [language, setLanguage] = useState<Language>('en');
   const [authenticatedUser, setAuthenticatedUser] = useState<{
@@ -24,13 +25,23 @@ export default function App() {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.toLowerCase();
-      if (hash === '#signin' || hash === '#login' || hash === '#auth' || hash === '#admin') {
+      if (hash === '#dashboard' || hash === '#portal') {
+        setCurrentView('dashboard');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (hash === '#signin' || hash === '#login' || hash === '#auth' || hash === '#admin') {
         setCurrentView('auth');
         if (hash === '#admin') {
           setAuthRole('admin');
         }
         window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else if (hash === '#home' || hash === '#features' || hash === '#services' || hash === '#giving' || hash === '#media' || hash === '#contact') {
+      } else if (
+        hash === '#home' ||
+        hash === '#features' ||
+        hash === '#services' ||
+        hash === '#giving' ||
+        hash === '#media' ||
+        hash === '#contact'
+      ) {
         setCurrentView('landing');
       }
     };
@@ -41,6 +52,13 @@ export default function App() {
   }, []);
 
   const handleOpenAuth = (role: UserRole = 'member') => {
+    // If already authenticated, directly transition to member dashboard
+    if (authenticatedUser) {
+      setCurrentView('dashboard');
+      window.location.hash = '#dashboard';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
     setAuthRole(role);
     setCurrentView('auth');
     window.location.hash = '#auth';
@@ -53,6 +71,12 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleGoToDashboard = () => {
+    setCurrentView('dashboard');
+    window.location.hash = '#dashboard';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleAuthSuccess = (user: { name: string; email: string; role: UserRole }) => {
     setAuthenticatedUser(user);
     try {
@@ -60,6 +84,10 @@ export default function App() {
     } catch {
       // ignore
     }
+    // Transition directly to the member dashboard upon login success!
+    setCurrentView('dashboard');
+    window.location.hash = '#dashboard';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleSignOut = () => {
@@ -69,11 +97,23 @@ export default function App() {
     } catch {
       // ignore
     }
+    setCurrentView('landing');
+    window.location.hash = '#home';
   };
 
   const toggleLanguage = () => {
     setLanguage((prev) => (prev === 'en' ? 'am' : 'en'));
   };
+
+  if (currentView === 'dashboard') {
+    return (
+      <MemberDashboard
+        user={authenticatedUser}
+        onSignOut={handleSignOut}
+        onBackToSite={handleBackToLanding}
+      />
+    );
+  }
 
   if (currentView === 'auth') {
     return (
@@ -85,6 +125,7 @@ export default function App() {
         authenticatedUser={authenticatedUser}
         onSuccessAuth={handleAuthSuccess}
         onSignOut={handleSignOut}
+        onGoToDashboard={handleGoToDashboard}
       />
     );
   }
@@ -94,6 +135,7 @@ export default function App() {
       onSignIn={handleOpenAuth}
       user={authenticatedUser}
       onSignOut={handleSignOut}
+      onOpenDashboard={handleGoToDashboard}
     />
   );
 }

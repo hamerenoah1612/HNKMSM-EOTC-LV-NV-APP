@@ -9,10 +9,15 @@ const SECTION_IDS = NAV_LINKS.map((link) => link.id);
  * Desktop: full inline nav. Mobile (<900px): no hamburger — the header keeps
  * just the logo + Sign In, and navigation moves to the bottom MobileNav bar.
  */
-export default function Navbar({ onSignIn, user, onSignOut }) {
+export default function Navbar({ onSignIn, user, onSignOut, onOpenDashboard }) {
   const active = useActiveSection(SECTION_IDS, 'home');
 
   const handleSignInClick = (e, role = 'member') => {
+    if (user && onOpenDashboard) {
+      e.preventDefault();
+      onOpenDashboard();
+      return;
+    }
     if (onSignIn) {
       e.preventDefault();
       onSignIn(role);

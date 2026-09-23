@@ -27,6 +27,7 @@ interface ChurchModalsProps {
   onCloseForgotPassword: () => void;
   authenticatedUser: { name: string; email: string; role: UserRole } | null;
   onSignOut: () => void;
+  onGoToDashboard?: () => void;
 }
 
 export const ChurchModals: React.FC<ChurchModalsProps> = ({
@@ -41,6 +42,7 @@ export const ChurchModals: React.FC<ChurchModalsProps> = ({
   onCloseForgotPassword,
   authenticatedUser,
   onSignOut,
+  onGoToDashboard,
 }) => {
   // Prayer request or quick contact submission state inside modals
   const [prayerName, setPrayerName] = useState('');
@@ -507,14 +509,23 @@ export const ChurchModals: React.FC<ChurchModalsProps> = ({
               </div>
             </div>
 
-            <div className="pt-3 border-t border-[#ebddce] flex justify-end">
+            <div className="pt-3 border-t border-[#ebddce] flex justify-end gap-2">
               <button
                 type="button"
                 onClick={onSignOut}
-                className="px-4 py-2 rounded-xl bg-[#6f3b21] hover:bg-[#5b2f19] text-white font-semibold text-xs cursor-pointer"
+                className="px-3.5 py-2 rounded-xl bg-[#ebd8c5] hover:bg-[#dec6b0] text-[#472714] font-semibold text-xs cursor-pointer"
               >
-                Return to Login Screen
+                Sign Out
               </button>
+              {onGoToDashboard && (
+                <button
+                  type="button"
+                  onClick={onGoToDashboard}
+                  className="px-4 py-2 rounded-xl bg-[#6f3b21] hover:bg-[#5b2f19] text-white font-semibold text-xs cursor-pointer flex items-center gap-1.5 shadow-sm"
+                >
+                  <span>Enter Dashboard →</span>
+                </button>
+              )}
             </div>
           </div>
         </div>

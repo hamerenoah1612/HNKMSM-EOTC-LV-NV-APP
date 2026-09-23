@@ -14,6 +14,7 @@ export default function LandingPage({
   onSignIn,
   user,
   onSignOut,
+  onOpenDashboard,
 }) {
   return (
     <div className="landing-page">
@@ -25,6 +26,7 @@ export default function LandingPage({
         onSignIn={onSignIn}
         user={user}
         onSignOut={onSignOut}
+        onOpenDashboard={onOpenDashboard}
       />
 
       <main id="main-content">

@@ -20,6 +20,7 @@ interface AuthPageProps {
   } | null;
   onSuccessAuth: (user: { name: string; email: string; role: UserRole }) => void;
   onSignOut: () => void;
+  onGoToDashboard?: () => void;
 }
 
 export const AuthPage: React.FC<AuthPageProps> = ({
@@ -30,6 +31,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({
   authenticatedUser,
   onSuccessAuth,
   onSignOut,
+  onGoToDashboard,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -174,6 +176,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({
         onCloseForgotPassword={() => setForgotPasswordOpen(false)}
         authenticatedUser={authenticatedUser}
         onSignOut={onSignOut}
+        onGoToDashboard={onGoToDashboard}
       />
     </div>
   );
