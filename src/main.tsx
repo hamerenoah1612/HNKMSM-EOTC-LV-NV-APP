@@ -4,6 +4,7 @@ import App from './App.tsx';
 import './styles/styles.css';
 import './styles/upgrade.css';
 import './styles/dashboard.css';
+import './styles/admin-dashboard.css';
 import './index.css';
 
 createRoot(document.getElementById('root')!).render(

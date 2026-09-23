@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react';
 import LandingPage from './components/LandingPage.jsx';
 import { AuthPage } from './components/AuthPage';
 import MemberDashboard from './pages/MemberDashboard.jsx';
+import SuperAdminDashboard from './pages/SuperAdminDashboard.jsx';
 import { UserRole, Language } from './types';
 
 export default function App() {
-  const [currentView, setCurrentView] = useState<'landing' | 'auth' | 'dashboard'>('landing');
+  const [currentView, setCurrentView] = useState<'landing' | 'auth' | 'member-dashboard' | 'admin-dashboard'>('landing');
   const [authRole, setAuthRole] = useState<UserRole>('member');
   const [language, setLanguage] = useState<Language>('en');
   const [authenticatedUser, setAuthenticatedUser] = useState<{
@@ -25,8 +26,11 @@ export default function App() {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.toLowerCase();
-      if (hash === '#dashboard' || hash === '#portal') {
-        setCurrentView('dashboard');
+      if (hash === '#admin-dashboard' || hash === '#admindashboard' || hash === '#superadmin') {
+        setCurrentView('admin-dashboard');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (hash === '#dashboard' || hash === '#member-dashboard' || hash === '#portal') {
+        setCurrentView('member-dashboard');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else if (hash === '#signin' || hash === '#login' || hash === '#auth' || hash === '#admin') {
         setCurrentView('auth');
@@ -52,16 +56,21 @@ export default function App() {
   }, []);
 
   const handleOpenAuth = (role: UserRole = 'member') => {
-    // If already authenticated, directly transition to member dashboard
+    // If already authenticated, directly transition to their corresponding dashboard
     if (authenticatedUser) {
-      setCurrentView('dashboard');
-      window.location.hash = '#dashboard';
+      if (authenticatedUser.role === 'admin') {
+        setCurrentView('admin-dashboard');
+        window.location.hash = '#admin-dashboard';
+      } else {
+        setCurrentView('member-dashboard');
+        window.location.hash = '#dashboard';
+      }
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
     setAuthRole(role);
     setCurrentView('auth');
-    window.location.hash = '#auth';
+    window.location.hash = role === 'admin' ? '#admin' : '#auth';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -72,8 +81,13 @@ export default function App() {
   };
 
   const handleGoToDashboard = () => {
-    setCurrentView('dashboard');
-    window.location.hash = '#dashboard';
+    if (authenticatedUser?.role === 'admin') {
+      setCurrentView('admin-dashboard');
+      window.location.hash = '#admin-dashboard';
+    } else {
+      setCurrentView('member-dashboard');
+      window.location.hash = '#dashboard';
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -84,9 +98,15 @@ export default function App() {
     } catch {
       // ignore
     }
-    // Transition directly to the member dashboard upon login success!
-    setCurrentView('dashboard');
-    window.location.hash = '#dashboard';
+    // Transition directly based on role:
+    // admin => admin-dashboard, member => member-dashboard
+    if (user.role === 'admin') {
+      setCurrentView('admin-dashboard');
+      window.location.hash = '#admin-dashboard';
+    } else {
+      setCurrentView('member-dashboard');
+      window.location.hash = '#dashboard';
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -105,7 +125,17 @@ export default function App() {
     setLanguage((prev) => (prev === 'en' ? 'am' : 'en'));
   };
 
-  if (currentView === 'dashboard') {
+  if (currentView === 'admin-dashboard') {
+    return (
+      <SuperAdminDashboard
+        user={authenticatedUser}
+        onSignOut={handleSignOut}
+        onBackToSite={handleBackToLanding}
+      />
+    );
+  }
+
+  if (currentView === 'member-dashboard') {
     return (
       <MemberDashboard
         user={authenticatedUser}

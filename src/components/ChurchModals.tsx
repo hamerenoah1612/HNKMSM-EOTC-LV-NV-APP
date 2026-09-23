@@ -523,7 +523,7 @@ export const ChurchModals: React.FC<ChurchModalsProps> = ({
                   onClick={onGoToDashboard}
                   className="px-4 py-2 rounded-xl bg-[#6f3b21] hover:bg-[#5b2f19] text-white font-semibold text-xs cursor-pointer flex items-center gap-1.5 shadow-sm"
                 >
-                  <span>Enter Dashboard →</span>
+                  <span>{authenticatedUser.role === 'admin' ? 'Enter Admin Dashboard →' : 'Enter Member Dashboard →'}</span>
                 </button>
               )}
             </div>
