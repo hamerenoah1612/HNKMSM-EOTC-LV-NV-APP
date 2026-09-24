@@ -10,9 +10,14 @@ export const BRAND = {
 
 export const NAV_LINKS = [
   { id: 'home', label: 'Home' },
+  { id: 'about', label: 'About Us' },
   { id: 'features', label: 'Features' },
   { id: 'services', label: 'Services' },
-  { id: 'media', label: 'Media' },
+  { id: 'events', label: 'Events' },
+  { id: 'news', label: 'News' },
+  { id: 'multimedia', label: 'Multimedia' },
+  { id: 'learning', label: 'Learning' },
+  { id: 'shop', label: 'Shop' },
   { id: 'giving', label: 'Donations' },
   { id: 'contact', label: 'Contact' },
 ];

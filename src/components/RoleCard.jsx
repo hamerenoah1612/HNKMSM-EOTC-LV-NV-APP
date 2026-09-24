@@ -1,5 +1,6 @@
 import Icon from './Icon.jsx';
 import { openPortal } from '../data/content.js';
+import { useLanguage } from '../context/LanguageContext';
 
 /**
  * Shared layout for the Admin / Member dashboard cards.
@@ -7,6 +8,9 @@ import { openPortal } from '../data/content.js';
  * and faded into the card by the CSS.
  */
 export default function RoleCard({ variant, image, icon, title, subtitle, items, cta, onSignIn }) {
+  const { language } = useLanguage();
+  const isAm = language === 'am';
+
   const handleClick = (e) => {
     if (onSignIn) {
       e.preventDefault();
@@ -15,6 +19,46 @@ export default function RoleCard({ variant, image, icon, title, subtitle, items,
       openPortal(e);
     }
   };
+
+  const adminItemsAm = [
+    'የሰበካ ጉባኤና የአባላት ምዝገባ አያያዝ',
+    'የቅዳሴና የክብረ በዓላት መርሐ ግብር ዕቅድ',
+    'የፋይናንስ፣ አስራትና ምጽዋት ሪፖርቶች',
+    'የመልቲሚዲያ፣ ማኅሌትና ዜና ስርጭት ቁጥጥር',
+    'የሰንበት ት/ቤትና ካቴድራል ፕሮጀክት ክትትል',
+  ];
+
+  const memberItemsAm = [
+    'የቤተሰብ መረጃና የአባልነት ሁኔታ ማደስ',
+    'የቅዳሴ ማስቀደስና የጸሎት ጥያቄዎች ማቅረብ',
+    'የአስራት፣ ስጦታና ምጽዋት አስተዋጽኦ ታሪክ',
+    'የሰንበት ት/ቤት የልጆች ምዝገባ',
+    'የቀጥታ ስርጭት ቅዳሴና ያሬዳዊ መዝሙራት ቤተ-መጻሕፍት',
+  ];
+
+  const displayTitle = isAm
+    ? variant === 'admin'
+      ? 'የአስተዳዳሪ ዳሽቦርድ'
+      : 'የአባል ዳሽቦርድ'
+    : title;
+
+  const displaySub = isAm
+    ? variant === 'admin'
+      ? 'ለቤተክርስቲያን አስተዳዳሪዎችና የሰበካ ጉባኤ አመራሮች'
+      : 'ከቤተክርስቲያንዎ ጋር ይገናኙ እና ይሳተፉ'
+    : subtitle;
+
+  const displayItems = isAm
+    ? variant === 'admin'
+      ? adminItemsAm
+      : memberItemsAm
+    : items;
+
+  const displayCta = isAm
+    ? variant === 'admin'
+      ? 'የአስተዳዳሪ ዳሽቦርድ ይክፈቱ →'
+      : 'የአባል ዳሽቦርድ ይክፈቱ →'
+    : cta.label;
 
   return (
     <article className={`role-card role-card--${variant}`}>
@@ -26,11 +70,11 @@ export default function RoleCard({ variant, image, icon, title, subtitle, items,
       <div className="role-copy">
         <div className="role-head">
           <Icon name={icon} size={26} className="role-icon" />
-          <h3>{title}</h3>
+          <h3>{displayTitle}</h3>
         </div>
-        <p className="role-sub">{subtitle}</p>
+        <p className="role-sub">{displaySub}</p>
         <ul>
-          {items.map((item) => (
+          {displayItems.map((item) => (
             <li key={item}>{item}</li>
           ))}
         </ul>
@@ -39,7 +83,7 @@ export default function RoleCard({ variant, image, icon, title, subtitle, items,
           href="#signin"
           onClick={handleClick}
         >
-          {cta.label}
+          {displayCta}
         </a>
       </div>
     </article>

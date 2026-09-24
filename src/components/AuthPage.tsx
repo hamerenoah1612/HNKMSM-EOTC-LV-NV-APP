@@ -42,40 +42,21 @@ export const AuthPage: React.FC<AuthPageProps> = ({
   const [forgotPasswordOpen, setForgotPasswordOpen] = useState(false);
 
   return (
-    <div className="min-h-screen w-full relative bg-[#fcf8f2] text-[#2b180d] overflow-x-hidden flex flex-col justify-between font-['Plus_Jakarta_Sans',sans-serif]">
-      {/* Background Sacred Canvas Layers reproducing the Ethiopian church aesthetic */}
+    <div className="min-h-screen w-full relative bg-[#fdfaf5] text-[#2b180d] overflow-x-hidden flex flex-col justify-between font-['Plus_Jakarta_Sans',sans-serif]">
+      {/* Background Sacred Canvas Layer using uploaded church portal background */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        {/* Panoramic Ethiopian Church backdrop illustration */}
+        {/* Full-coverage authentic Ethiopian Church portal backdrop */}
         <img
           src="/assets/church_portal_background.jpg"
-          alt=""
-          className="w-full h-full object-cover object-center opacity-30 mix-blend-multiply filter contrast-105"
+          alt="Ethiopian Orthodox Church Sacred Mural Backdrop"
+          className="w-full h-full object-cover object-center opacity-65 contrast-[1.08] saturate-[1.12]"
         />
 
-        {/* Soft Golden Radiant Aura in the upper center behind the Holy Icon */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full bg-radial from-[#fce9ce]/45 via-[#f8dfba]/20 to-transparent blur-3xl pointer-events-none" />
+        {/* Delicate antique parchment luminous gradient over top and bottom for readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#fdf9f3]/70 via-[#fdf8f0]/20 to-[#fdf8f0]/80 pointer-events-none" />
 
-        {/* Soft rolling landscape hills along the horizon at the bottom */}
-        <svg
-          viewBox="0 0 1440 220"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="absolute bottom-0 left-0 right-0 w-full h-24 sm:h-36 md:h-48 opacity-25 text-[#bf9c80]"
-          preserveAspectRatio="none"
-        >
-          {/* Distant Hills */}
-          <path
-            d="M0 160 Q 240 120 480 150 T 960 130 T 1440 160 L 1440 220 L 0 220 Z"
-            fill="currentColor"
-            opacity="0.5"
-          />
-          {/* Nearer Rolling Ridges */}
-          <path
-            d="M0 180 Q 320 145 640 175 T 1280 160 T 1440 185 L 1440 220 L 0 220 Z"
-            fill="currentColor"
-            opacity="0.8"
-          />
-        </svg>
+        {/* Soft Golden Radiant Aura behind central holy icon */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[750px] h-[750px] rounded-full bg-radial from-[#fde6c4]/45 via-[#fae0b8]/20 to-transparent blur-3xl pointer-events-none" />
       </div>
 
       {/* Main Page Layout */}
@@ -181,3 +162,5 @@ export const AuthPage: React.FC<AuthPageProps> = ({
     </div>
   );
 };
+
+export default AuthPage;

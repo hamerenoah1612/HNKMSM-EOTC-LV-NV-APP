@@ -1,0 +1,529 @@
+/* Enhanced styling for Objectives-style sections, Standalone Pages, and More menus */
+
+/* 1. Objectives-Style Grid & Cards for all sections */
+.objectives-tile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+@media (min-width: 560px) {
+  .objectives-tile-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .objectives-tile-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.objectives-tile-card {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  box-shadow: 0 4px 12px rgba(59, 42, 33, 0.03);
+}
+
+.objectives-tile-card:hover {
+  transform: translateY(-2px);
+  border-color: #b08968;
+  box-shadow: 0 10px 24px rgba(59, 42, 33, 0.08);
+}
+
+.objectives-tile-card .glyph {
+  font-size: 1.6rem;
+  color: var(--primary);
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.objectives-tile-card strong {
+  font-size: 0.94rem;
+  color: var(--text);
+  line-height: 1.25;
+}
+
+.tile-category-tag {
+  font-size: 0.72rem;
+  color: #8c7365;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.tile-summary-text {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.45;
+  margin: 4px 0 8px;
+  flex-grow: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.tile-click-action {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-top: auto;
+  padding-top: 4px;
+}
+
+/* 2. Theme Nuances for Each Section (Distinct background subtleties) */
+.objectives-services-theme {
+  background: linear-gradient(135deg, #f6eae0 0%, #fffbf8 100%);
+  border-bottom: 1px solid var(--line);
+  padding: 34px 0;
+}
+
+.objectives-events-theme {
+  background: linear-gradient(135deg, #f7efe6 0%, #fefcf9 100%);
+  border-bottom: 1px solid var(--line);
+  padding: 34px 0;
+}
+
+.objectives-news-theme {
+  background: linear-gradient(135deg, #f5ebdF 0%, #fcf7f2 100%);
+  border-bottom: 1px solid var(--line);
+  padding: 34px 0;
+}
+
+.objectives-multimedia-theme {
+  background: linear-gradient(135deg, #f4e7dc 0%, #faf4ee 100%);
+  border-bottom: 1px solid var(--line);
+  padding: 34px 0;
+}
+
+.objectives-learning-theme {
+  background: linear-gradient(135deg, #f8efe7 0%, #fefbfa 100%);
+  border-bottom: 1px solid var(--line);
+  padding: 34px 0;
+}
+
+.objectives-shop-theme {
+  background: linear-gradient(135deg, #f3e5d8 0%, #fbf5ef 100%);
+  border-bottom: 1px solid var(--line);
+  padding: 34px 0;
+}
+
+.objectives-donations-theme {
+  background: linear-gradient(135deg, #f7ece2 0%, #fffdfa 100%);
+  border-bottom: 1px solid var(--line);
+  padding: 34px 0;
+}
+
+/* Filter pills within objectives theme */
+.objectives-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+.obj-filter-pill {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.obj-filter-pill:hover {
+  background: var(--cream);
+  color: var(--text);
+}
+
+.obj-filter-pill.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+/* 3. Small Clickable Cookie Banner Badge (Position Left or Right, title & icon only) */
+.small-cookie-badge {
+  position: fixed;
+  bottom: 76px; /* above mobile nav on mobile, comfortably visible on desktop */
+  z-index: 999;
+  background: rgba(43, 24, 13, 0.92);
+  color: #fcf6f0;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(221, 184, 146, 0.4);
+  border-radius: 28px;
+  padding: 6px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 10px 28px rgba(35, 18, 9, 0.35);
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 600;
+  transition: all 0.22s ease;
+  user-select: none;
+}
+
+.small-cookie-badge:hover {
+  background: rgba(43, 24, 13, 0.98);
+  transform: translateY(-2px);
+  border-color: #ddb892;
+}
+
+.small-cookie-badge.pos-left {
+  left: 16px;
+}
+
+.small-cookie-badge.pos-right {
+  right: 16px;
+}
+
+@media (min-width: 900px) {
+  .small-cookie-badge {
+    bottom: 24px;
+  }
+}
+
+.cookie-icon {
+  font-size: 1rem;
+}
+
+.cookie-title {
+  white-space: nowrap;
+}
+
+.cookie-switch-btn,
+.cookie-dismiss-btn {
+  background: none;
+  border: none;
+  color: #ddb892;
+  font-size: 0.8rem;
+  padding: 2px 4px;
+  cursor: pointer;
+  border-radius: 4px;
+  line-height: 1;
+}
+
+.cookie-switch-btn:hover,
+.cookie-dismiss-btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* 4. Recreated About Us & Contact CTA Banners (Exact match & size to 'Together for a Stronger Tomorrow') */
+.cta-banner-about {
+  background: linear-gradient(90deg, #784f33, #966343);
+  margin-top: 14px;
+}
+
+.cta-banner-contact {
+  background: linear-gradient(90deg, #6c4228, #865538);
+  margin-top: 14px;
+}
+
+/* 5. Mobile Nav "More" Popover & Bottom Nav */
+.mobile-nav-more-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 7px 2px 6px;
+  border-radius: 12px;
+  font-size: 0.64rem;
+  font-weight: 500;
+  color: var(--muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.mobile-nav-more-btn.active,
+.mobile-nav-more-btn:hover {
+  color: var(--primary);
+  background: var(--cream);
+  font-weight: 700;
+}
+
+.more-dots-icon {
+  font-size: 1.15rem;
+  line-height: 1;
+  font-weight: bold;
+}
+
+.mobile-more-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 18, 10, 0.6);
+  z-index: 150;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  animation: modal-fade 0.18s ease;
+}
+
+.mobile-more-sheet {
+  background: #fffaf6;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding: 18px 18px calc(18px + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -12px 36px rgba(0, 0, 0, 0.25);
+  animation: sheet-slide-up 0.22s ease-out;
+  border: 1px solid var(--line);
+}
+
+@keyframes sheet-slide-up {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.mobile-more-sheet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 14px;
+}
+
+.mobile-more-sheet-header strong {
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.mobile-more-close {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 4px;
+}
+
+.mobile-more-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.mobile-more-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 6px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.mobile-more-item:hover,
+.mobile-more-item:active {
+  background: var(--cream);
+  color: var(--primary);
+}
+
+.mobile-more-btn {
+  font-family: inherit;
+  border: 1px solid var(--line);
+}
+
+/* 6. Footer Navigation for Mobile/Tablet & Desktop */
+.footer-more-container {
+  position: relative;
+  display: inline-block;
+}
+
+.footer-more-toggle {
+  background: none;
+  border: none;
+  font: inherit;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.footer-more-toggle:hover {
+  color: var(--primary);
+}
+
+.footer-more-dropdown {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  margin-bottom: 8px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(59, 42, 33, 0.15);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 140px;
+  z-index: 100;
+}
+
+.footer-more-dropdown a,
+.footer-sub-link-btn {
+  padding: 6px 10px;
+  font-size: 0.78rem;
+  color: var(--text);
+  border-radius: 6px;
+  text-align: left;
+  background: none;
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.footer-more-dropdown a:hover,
+.footer-sub-link-btn:hover {
+  background: var(--cream);
+  color: var(--primary);
+}
+
+/* 7. Standalone Pages (About Us & Contact Us) */
+.standalone-page {
+  min-height: 100vh;
+  background: var(--canvas);
+}
+
+.standalone-hero {
+  position: relative;
+  background: linear-gradient(135deg, #5b361e 0%, #7e5338 60%, #986948 100%);
+  color: #fff;
+  padding: 56px 0 46px;
+  overflow: hidden;
+}
+
+.standalone-hero-art {
+  position: absolute;
+  right: 2%;
+  top: -10%;
+  height: 140%;
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.standalone-hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+}
+
+.standalone-hero h1 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin: 4px 0 12px;
+  color: #ffffff;
+}
+
+.standalone-hero-lead {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #faeee4;
+  margin: 0;
+}
+
+.standalone-body {
+  padding-block: 40px 60px;
+}
+
+.standalone-footer-cta {
+  margin-top: 36px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 24px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  box-shadow: var(--shadow);
+}
+
+.standalone-footer-cta h3 {
+  margin: 0 0 4px;
+  font-size: 1.15rem;
+  color: var(--text);
+}
+
+.standalone-footer-cta p {
+  margin: 0;
+  font-size: 0.86rem;
+  color: var(--muted);
+}
+
+/* 15. Church School Section & Cards (Styled identical to Admin & Member Dashboard) */
+.church-school-section {
+  padding-block: 74px;
+}
+
+.church-school-card .role-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.church-school-card .role-head h3 {
+  font-size: 1.22rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0;
+  line-height: 1.25;
+  color: var(--text);
+}
+
+.church-school-card .role-head .role-icon {
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.church-school-card .school-media {
+  min-height: 260px;
+  background-size: cover !important;
+  background-position: center !important;
+  position: relative;
+}
+
+.church-school-card .school-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(43, 24, 13, 0.25), rgba(43, 24, 13, 0.04));
+}
+
+.church-school-card .role-sub {
+  font-size: 0.88rem;
+  color: var(--muted);
+  font-weight: 500;
+  margin: 0 0 16px 0;
+}
+

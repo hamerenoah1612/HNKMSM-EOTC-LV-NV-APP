@@ -1,0 +1,265 @@
+/* ==========================================================================
+   Together for a Stronger Tomorrow Style System & Objectives Band Standardization
+   ========================================================================== */
+
+/* Section bands matching App's Core Objectives (.footer-objectives style) */
+.section-band {
+  margin-bottom: 32px;
+}
+
+.section-band .objectives-art {
+  position: absolute;
+  left: 3%;
+  top: -8%;
+  height: 175%;
+  width: auto;
+  max-width: none;
+  mix-blend-mode: multiply;
+  opacity: 0.7;
+  pointer-events: none;
+  user-select: none;
+  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%), linear-gradient(to right, transparent 0, #000 25%, #000 75%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 55%, transparent 100%), linear-gradient(to right, transparent 0, #000 25%, #000 75%, transparent 100%);
+}
+
+.section-band .objectives-grid div {
+  transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+}
+
+.section-band .objectives-grid div:hover {
+  transform: translateY(-2px);
+  border-color: #b08968;
+  box-shadow: 0 8px 20px rgba(94, 52, 27, 0.08);
+}
+
+/* Together for a Stronger Tomorrow Card Component */
+.together-card-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.together-sacred-card {
+  position: relative;
+  background: linear-gradient(135deg, #fbf4ec 0%, #fffaf6 60%, #f6ebe0 100%);
+  border: 1.5px solid #ecd8c7;
+  border-radius: 28px;
+  box-shadow: 0 16px 40px rgba(94, 52, 27, 0.09);
+  padding: 36px 28px 32px;
+  width: min(100%, 880px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Luminous Glow */
+.together-glow-orb {
+  position: absolute;
+  top: 10px;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(246, 215, 164, 0.45) 0%, rgba(231, 190, 132, 0.2) 50%, transparent 70%);
+  filter: blur(28px);
+  pointer-events: none;
+}
+
+/* Icon Frame & Feathering */
+.together-icon-frame {
+  position: relative;
+  z-index: 2;
+  width: 240px;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.together-icon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 20px;
+  box-shadow: 0 10px 26px rgba(94, 52, 27, 0.16);
+  transition: transform 0.4s ease;
+}
+
+.together-icon-img:hover {
+  transform: scale(1.03);
+}
+
+/* Script & Tagline */
+.together-script-banner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  margin: 12px 0 24px;
+}
+
+.together-script-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.script-line {
+  height: 1px;
+  width: 36px;
+  background: #c8a98f;
+}
+
+.together-script-title {
+  margin: 0;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.45rem;
+  color: #5e341b;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.together-script-sub {
+  margin: 4px 0 0;
+  font-size: 0.86rem;
+  color: #785642;
+  font-weight: 500;
+}
+
+/* 4 Pillars Grid */
+.together-pillars-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  width: 100%;
+  border-top: 1px solid rgba(234, 215, 194, 0.85);
+  padding-top: 24px;
+  margin-bottom: 24px;
+}
+
+@media (min-width: 640px) {
+  .together-pillars-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 860px) {
+  .together-pillars-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.together-pillar-card {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid #ebdcd0;
+  border-radius: 16px;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.together-pillar-card:hover {
+  background: #ffffff;
+  transform: translateY(-2px);
+  border-color: #b08968;
+  box-shadow: 0 8px 18px rgba(94, 52, 27, 0.08);
+}
+
+.pillar-icon-bubble {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #eedfcf;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  transition: background 0.2s ease;
+}
+
+.together-pillar-card:hover .pillar-icon-bubble {
+  background: #e4d2bf;
+}
+
+.pillar-title-en {
+  font-size: 0.86rem;
+  color: #482c1b;
+  margin-bottom: 2px;
+}
+
+.pillar-title-am {
+  font-size: 0.72rem;
+  color: #8c6a53;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.pillar-desc {
+  margin: 0;
+  font-size: 0.78rem;
+  color: #6d5444;
+  line-height: 1.4;
+}
+
+/* Fast Form inside Together Contact */
+.together-quick-contact-box {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 540px;
+  margin-bottom: 20px;
+}
+
+.together-fast-form {
+  display: flex;
+  gap: 8px;
+}
+
+.together-fast-input {
+  flex-grow: 1;
+  padding: 10px 14px;
+  border: 1.5px solid #dccbbd;
+  border-radius: 10px;
+  font-size: 0.86rem;
+  background: #fff;
+  outline: none;
+}
+
+.together-fast-input:focus {
+  border-color: #7f5539;
+}
+
+.together-fast-btn {
+  padding: 0 16px;
+  min-height: 42px;
+  font-size: 0.84rem;
+  gap: 6px;
+}
+
+.together-card-action {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Standalone Pages (AboutPage & ContactPage) */
+.portal-standalone-page {
+  min-height: 100vh;
+  background: #fbf8f5;
+}
+
+.btn-back-nav {
+  min-height: 38px;
+  padding: 0 14px;
+  font-size: 0.82rem;
+}
