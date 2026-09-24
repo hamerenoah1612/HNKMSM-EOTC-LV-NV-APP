@@ -37,7 +37,14 @@ export default function AppShell({ user, onSignOut, onBackToSite, children }) {
         <div className="page">
           <Topbar
             user={activeUser}
-            onOpenMobileMenu={openMobile}
+            onOpenMobileMenu={() => {
+              if (typeof window !== 'undefined' && window.innerWidth >= 1024) {
+                toggleDesktop();
+              } else {
+                if (isMobileOpen) closeMobile();
+                else openMobile();
+              }
+            }}
             onSignOut={onSignOut}
             onBackToSite={onBackToSite}
           />

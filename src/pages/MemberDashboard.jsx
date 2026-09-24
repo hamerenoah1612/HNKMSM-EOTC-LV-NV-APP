@@ -12,6 +12,7 @@ import RecentActivityPanel from '../components/dashboard/RecentActivityPanel.jsx
 import QuickActionsPanel from '../components/dashboard/QuickActionsPanel.jsx';
 import ShopPanel from '../components/dashboard/ShopPanel.jsx';
 import FaithBanner from '../components/dashboard/FaithBanner.jsx';
+import { useLanguage } from '../context/LanguageContext';
 
 import {
   currentUser as defaultUser,
@@ -33,13 +34,40 @@ import {
 } from '../data/memberDashboardData.js';
 
 export default function MemberDashboard({ user, onSignOut, onBackToSite }) {
+  const { language } = useLanguage();
+  const isAm = language === 'am';
+
+  const pageIntroAm = {
+    title: 'የምዕመን ዳሽቦርድ',
+    subtitle: 'ከቅድስት ቤተክርስቲያንዎ፣ ምስጢራት፣ አስራት፣ ትምህርትና ማኅበረሰብ ጋር በቀጥታ ይገናኙ።',
+    scripture: {
+      ethiopic: '“በስሜ ሁለት ወይም ሦስት በሆኑበት በዚያ በመካከላቸው እሆናለሁና።”',
+      english: '“For where two or three gather in my name, there am I with them.”',
+      citation: 'ማቴዎስ ፲፰:፳',
+    },
+  };
+
+  const statsAm = [
+    { id: 'events', icon: '▣', label: 'የሚመጡ በዓላት', value: '3', helper: 'በዚህ ወር' },
+    { id: 'prayers', icon: '🙏', label: 'የጸሎት ጥያቄዎች', value: '2', helper: 'ንቁ ጥያቄዎች' },
+    { id: 'donations', icon: '♥', label: 'የተሰጠ አስራትና ስጦታ', value: '$245', trend: '↑ +18%', helper: 'በዚህ ወር' },
+    { id: 'applications', icon: '▤', label: 'የምስጢራት ማመልከቻዎች', value: '4', helper: 'አጠቃላይ ጥያቄዎች' },
+    { id: 'learning', icon: '▤', label: 'የመንፈሳዊ ትምህርት ደረጃ', value: '68%', progress: 68 },
+    { id: 'unread-messages', icon: '▰', label: 'መልእክቶች', value: '7', helper: 'ያልተነበቡ' },
+  ];
+
+  const activePageIntro = isAm ? pageIntroAm : pageIntro;
+  const activeStats = isAm ? statsAm : stats;
+
   // Merge authenticated user info if present
   const displayUser = user
     ? {
         ...defaultUser,
         name: user.name || defaultUser.name,
         email: user.email || '',
-        role: user.role === 'admin' ? 'Clergy / Administrator' : 'Member',
+        role: isAm
+          ? (user.role === 'admin' ? 'ካህናት / አስተዳዳሪ' : 'ምዕመን')
+          : (user.role === 'admin' ? 'Clergy / Administrator' : 'Member'),
         initials: user.name
           ? user.name
               .split(' ')
@@ -53,8 +81,8 @@ export default function MemberDashboard({ user, onSignOut, onBackToSite }) {
 
   return (
     <AppShell user={displayUser} onSignOut={onSignOut} onBackToSite={onBackToSite}>
-      <PageIntro title={pageIntro.title} subtitle={pageIntro.subtitle} scripture={pageIntro.scripture} />
-      <StatsGrid stats={stats} />
+      <PageIntro title={activePageIntro.title} subtitle={activePageIntro.subtitle} scripture={activePageIntro.scripture} />
+      <StatsGrid stats={activeStats} />
 
       <section className="dashboard-grid">
         <ServicesPanel services={services} />

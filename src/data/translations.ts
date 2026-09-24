@@ -21,8 +21,8 @@ export const TRANSLATIONS: Record<string, { en: string; am: string }> = {
     am: 'ወደ ዋና ገጽ',
   },
   backToChurchWebsite: {
-    en: '← Church Website',
-    am: '← ወደ ቤተክርስቲያን ዋና ገጽ',
+    en: 'Back to Home',
+    am: '← ወደ ዋና ገጽ',
   },
   signIn: {
     en: 'Sign In',
@@ -113,6 +113,10 @@ export const TRANSLATIONS: Record<string, { en: string; am: string }> = {
   navChurchSchool: {
     en: 'Church School',
     am: 'የቤተክርስቲያን ት/ቤት',
+  },
+  navSchool: {
+    en: 'School',
+    am: 'ትምህርት ቤት',
   },
   navShop: {
     en: 'Shop',

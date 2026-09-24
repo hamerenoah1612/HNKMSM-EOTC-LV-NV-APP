@@ -152,8 +152,6 @@ function AppContent() {
         user={authenticatedUser}
         onSignOut={handleSignOut}
         onBackToSite={handleBackToLanding}
-        language={language}
-        onToggleLanguage={toggleLanguage}
       />
     );
   }
@@ -164,8 +162,6 @@ function AppContent() {
         user={authenticatedUser}
         onSignOut={handleSignOut}
         onBackToSite={handleBackToLanding}
-        language={language}
-        onToggleLanguage={toggleLanguage}
       />
     );
   }
@@ -176,8 +172,6 @@ function AppContent() {
         onBackToSite={handleBackToLanding}
         onSignIn={handleOpenAuth}
         onNavigateContact={handleNavigateContact}
-        language={language}
-        onToggleLanguage={toggleLanguage}
       />
     );
   }
@@ -188,8 +182,6 @@ function AppContent() {
         onBackToSite={handleBackToLanding}
         onSignIn={handleOpenAuth}
         onNavigateAbout={handleNavigateAbout}
-        language={language}
-        onToggleLanguage={toggleLanguage}
       />
     );
   }
@@ -217,8 +209,6 @@ function AppContent() {
       onOpenDashboard={handleGoToDashboard}
       onNavigateAbout={handleNavigateAbout}
       onNavigateContact={handleNavigateContact}
-      language={language}
-      onToggleLanguage={toggleLanguage}
     />
   );
 }

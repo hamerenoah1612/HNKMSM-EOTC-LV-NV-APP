@@ -1,5 +1,5 @@
 import React from 'react';
-import { EthiopianCross } from './EthiopianCross';
+import logo from '../assets/logo-cross.png';
 import { Language } from '../types';
 import {
   CHURCH_NAME_EN,
@@ -31,19 +31,35 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <header className="w-full pt-4 md:pt-6 pb-2 px-4 sm:px-8 md:px-12 border-b border-[#ebd8c5]/50 relative z-20">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-        {/* Church Identity */}
+        {/* Church Identity - Uniform with Landing Page */}
         <div className="flex items-center gap-3.5 sm:gap-4">
-          <div className="shrink-0 p-1 bg-[#f4ebd9]/80 rounded-xl border border-[#decbba] shadow-2xs">
-            <EthiopianCross size={46} className="text-[#804627]" />
-          </div>
-          <div>
-            <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-[#2b180d] font-['Cinzel',Georgia,serif]">
-              {CHURCH_NAME_EN}
-            </h1>
-            <p className="text-xs sm:text-sm text-[#7d5945] font-medium tracking-wide">
-              {language === 'am' ? 'የኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ቤተክርስቲያን' : CHURCH_SUBTITLE_EN}
-            </p>
-          </div>
+          <a
+            href="#home"
+            onClick={(e) => {
+              if (onBackToLanding) {
+                e.preventDefault();
+                onBackToLanding();
+              }
+            }}
+            className="flex items-center gap-3.5 sm:gap-4 cursor-pointer hover:opacity-95 transition-opacity"
+            title={language === 'am' ? 'ወደ ዋና ገጽ ተመለስ' : 'Back to Home'}
+          >
+            <img
+              src={logo}
+              alt="HNKMSM Logo"
+              width="40"
+              height="48"
+              className="brand-logo shrink-0 rounded-lg object-contain w-auto h-11 sm:h-12"
+            />
+            <div>
+              <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-[#2b180d] font-['Cinzel',Georgia,serif]">
+                {CHURCH_NAME_EN}
+              </h1>
+              <p className="text-xs sm:text-sm text-[#7d5945] font-medium tracking-wide">
+                {language === 'am' ? 'የኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ቤተክርስቲያን' : CHURCH_SUBTITLE_EN}
+              </p>
+            </div>
+          </a>
         </div>
 
         {/* Top Right Verse & Controls */}
@@ -74,10 +90,10 @@ export const Header: React.FC<HeaderProps> = ({
                 type="button"
                 onClick={onBackToLanding}
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-[#ebd8c5] hover:bg-[#dfc5ac] text-[#472714] border border-[#cfb59d] transition-all cursor-pointer shadow-2xs"
-                title={language === 'am' ? 'ወደ ቤተክርስቲያን ዋና ገጽ ተመለስ' : 'Back to Church Website'}
+                title={language === 'am' ? 'ወደ ዋና ገጽ ተመለስ' : 'Back to Home'}
               >
                 <ArrowLeft className="w-3.5 h-3.5 text-[#7f4422]" />
-                <span>{language === 'am' ? 'ወደ ዋና ገጽ' : 'Back to Site'}</span>
+                <span>{language === 'am' ? 'ወደ ዋና ገጽ' : 'Back to Home'}</span>
               </button>
             )}
 

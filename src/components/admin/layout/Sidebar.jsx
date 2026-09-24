@@ -1,5 +1,25 @@
 import logo from '../../../assets/logo-cross.png';
 import { BRAND } from '../../../data/content.js';
+import { useLanguage } from '../../../context/LanguageContext';
+
+const ADMIN_NAV_TRANSLATIONS = {
+  overview: { en: 'Overview', am: 'አጠቃላይ እይታ' },
+  churches: { en: 'Churches/Parishes', am: 'አብያተ ክርስቲያናትና ሰበካዎች' },
+  members: { en: 'Members', am: 'አባላትና ምዕመናን' },
+  admins: { en: 'Admins & Roles', am: 'አስተዳዳሪዎችና ኃላፊነቶች' },
+  services: { en: 'Services', am: 'አገልግሎቶች' },
+  events: { en: 'Events', am: 'መርሐ ግብሮች' },
+  education: { en: 'Education', am: 'ትምህርትና ጥናት' },
+  media: { en: 'Media Library', am: 'መልቲሚዲያ ቤተ መጻሕፍት' },
+  donations: { en: 'Donations', am: 'አስራትና ስጦታ' },
+  payments: { en: 'Payments', am: 'ክፍያዎች' },
+  ecommerce: { en: 'E-commerce', am: 'የመጻሕፍትና ዕቃዎች ሱቅ' },
+  projects: { en: 'Projects & Voting', am: 'ፕሮጀክቶችና ውሳኔዎች' },
+  communications: { en: 'Communications', am: 'መረጃና ግንኙነት' },
+  reports: { en: 'Reports & Analytics', am: 'ሪፖርቶችና ትንታኔ' },
+  settings: { en: 'System Settings', am: 'የስርዓት ቅንብሮች' },
+  audit: { en: 'Audit Logs', am: 'የኦዲት መዝገብ' },
+};
 
 export default function Sidebar({
   navItems,
@@ -10,6 +30,9 @@ export default function Sidebar({
   onNavClick,
   onSignOut,
 }) {
+  const { language, t } = useLanguage();
+  const isAm = language === 'am';
+
   return (
     <aside
       className={`sidebar ${isMobileOpen ? 'open-mobile' : ''} ${isExpanded ? 'is-expanded' : ''}`.trim()}
@@ -34,33 +57,36 @@ export default function Sidebar({
           height="44"
         />
         <div className="brand-copy">
-          <strong>{BRAND.name}</strong>
-          <span>Ethiopian Orthodox Tewahedo Church</span>
-          <span className="role-badge">Super Admin &amp; Clergy Portal</span>
+          <strong>{isAm ? t('churchName', 'ደብረ ምሕረት ቅድስት ማርያም') : BRAND.name}</strong>
+          <span>{isAm ? 'የኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ቤተክርስቲያን' : 'Ethiopian Orthodox Tewahedo Church'}</span>
+          <span className="role-badge">{isAm ? 'የሰበካ ጉባኤ ጠቅላይ አስተዳደር' : 'Super Admin & Clergy Portal'}</span>
         </div>
       </div>
 
       <nav>
-        {navItems.map((item) => (
-          <a
-            key={item.id}
-            className={`nav ${item.active ? 'active' : ''}`.trim()}
-            href={item.href}
-            onClick={(e) => {
-              if (item.href === '#') e.preventDefault();
-              onNavClick(e);
-            }}
-          >
-            <span>{item.icon}</span>
-            <b>{item.label}</b>
-          </a>
-        ))}
+        {navItems.map((item) => {
+          const translatedLabel = ADMIN_NAV_TRANSLATIONS[item.id]?.[language] || item.label;
+          return (
+            <a
+              key={item.id}
+              className={`nav ${item.active ? 'active' : ''}`.trim()}
+              href={item.href}
+              onClick={(e) => {
+                if (item.href === '#') e.preventDefault();
+                onNavClick(e);
+              }}
+            >
+              <span>{item.icon}</span>
+              <b>{translatedLabel}</b>
+            </a>
+          );
+        })}
       </nav>
 
       <div className="side-footer">
         <div className="church-art">✝ ⛪ ✝</div>
-        <em>Faith • Community<br />Service • Together</em>
-        <small>All for the Glory of God</small>
+        <em>{isAm ? <>እምነት • ማኅበር<br />አገልግሎት • አብረን</> : <>Faith • Community<br />Service • Together</>}</em>
+        <small>{isAm ? 'ሁሉ ለእግዚአብሔር ክብር' : 'All for the Glory of God'}</small>
         <small>© 2026 HNKMSM-EOTC-LV-NV</small>
         {onSignOut && (
           <button
@@ -78,7 +104,7 @@ export default function Sidebar({
               cursor: 'pointer',
             }}
           >
-            Sign Out
+            {isAm ? 'ውጡ (Sign Out)' : 'Sign Out'}
           </button>
         )}
       </div>

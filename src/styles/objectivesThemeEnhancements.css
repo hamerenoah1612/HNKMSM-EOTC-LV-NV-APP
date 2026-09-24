@@ -240,15 +240,19 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 3px;
-  padding: 7px 2px 6px;
-  border-radius: 12px;
+  padding: 6px 2px 5px;
+  border-radius: 10px;
   font-size: 0.64rem;
   font-weight: 500;
   color: var(--muted);
   background: none;
   border: none;
   cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
   transition: all 0.18s ease;
 }
 
@@ -314,6 +318,53 @@
   padding: 4px;
 }
 
+/* Prominent Language Switcher inside More sheet for Mobile and Tablet */
+.mobile-more-lang-bar {
+  margin-bottom: 14px;
+}
+
+.mobile-more-lang-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 14px;
+  background: #f3e7da;
+  border: 1px solid #d6beaa;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+  box-shadow: 0 1px 3px rgba(43, 24, 13, 0.05);
+}
+
+.mobile-more-lang-btn:hover,
+.mobile-more-lang-btn:active {
+  background: #ebd9c7;
+  border-color: #c7ad97;
+  transform: translateY(-1px);
+}
+
+.lang-btn-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #5a331c;
+}
+
+.lang-pill-badge {
+  background: #7f5539;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  letter-spacing: 0.02em;
+}
+
 .mobile-more-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -350,24 +401,64 @@
 }
 
 /* 6. Footer Navigation for Mobile/Tablet & Desktop */
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.84rem;
+  color: var(--muted);
+}
+
+.footer-nav-link,
+.footer-more-toggle,
+.footer-signin-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  margin: 0;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #4a3b32;
+  background: transparent;
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+  line-height: 1;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.footer-nav-link:hover,
+.footer-more-toggle:hover {
+  background: var(--cream);
+  color: var(--primary);
+  border-color: rgba(127, 85, 57, 0.15);
+}
+
+.footer-nav-link svg {
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.footer-signin-btn {
+  font-weight: 600;
+  color: var(--primary);
+  border-color: rgba(127, 85, 57, 0.25);
+  background: rgba(127, 85, 57, 0.06);
+}
+
+.footer-signin-btn:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
 .footer-more-container {
   position: relative;
-  display: inline-block;
-}
-
-.footer-more-toggle {
-  background: none;
-  border: none;
-  font: inherit;
-  color: var(--muted);
-  cursor: pointer;
-  padding: 0;
-  font-size: 0.8rem;
-  font-weight: 600;
-}
-
-.footer-more-toggle:hover {
-  color: var(--primary);
+  display: inline-flex;
+  align-items: center;
 }
 
 .footer-more-dropdown {

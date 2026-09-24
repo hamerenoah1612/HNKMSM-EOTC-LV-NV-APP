@@ -1,8 +1,31 @@
 import logo from '../../assets/logo-cross.png';
 import { BRAND } from '../../data/content.js';
+import { useLanguage } from '../../context/LanguageContext';
+
+const NAV_TRANSLATIONS = {
+  dashboard: { en: 'Dashboard', am: 'ዳሽቦርድ' },
+  profile: { en: 'My Profile', am: 'የግል መገለጫዬ' },
+  household: { en: 'Family / Household', am: 'ቤተሰብና አባላት' },
+  services: { en: 'Services', am: 'አገልግሎቶች' },
+  prayer: { en: 'Prayer Requests', am: 'የጸሎት ጥያቄዎች' },
+  events: { en: 'Events', am: 'መርሐ ግብሮች' },
+  education: { en: 'Education', am: 'ትምህርትና ጥናት' },
+  media: { en: 'Media Library', am: 'መልቲሚዲያ ቤተ መጻሕፍት' },
+  giving: { en: 'Donations & Giving', am: 'አስራትና ምጽዋት' },
+  payments: { en: 'Payments', am: 'ክፍያዎች' },
+  messages: { en: 'Messages', am: 'መልእክቶች' },
+  shop: { en: 'Shop', am: 'የዕቃዎች ሱቅ' },
+  projects: { en: 'Projects & Voting', am: 'ፕሮጀክቶችና ድምፅ' },
+  settings: { en: 'Settings', am: 'ቅንብሮች' },
+};
 
 export default function Sidebar({ navItems, isDesktopExpanded, isMobileOpen, onToggle, onSignOut, user }) {
-  const userRoleLabel = user?.role === 'admin' ? 'Clergy : Administrator' : 'Member : Church Member';
+  const { language, t } = useLanguage();
+  const isAm = language === 'am';
+
+  const userRoleLabel = isAm
+    ? (user?.role === 'admin' ? 'ካህናት : አስተዳዳሪ' : 'ምዕመን : የደብር አባል')
+    : (user?.role === 'admin' ? 'Clergy : Administrator' : 'Member : Church Member');
 
   return (
     <aside
@@ -23,31 +46,34 @@ export default function Sidebar({ navItems, isDesktopExpanded, isMobileOpen, onT
         </button>
         <img className="sidebar-logo-img" src={logo} alt="HNKMSM Logo" width="36" height="44" />
         <div className="brand-copy">
-          <strong>{BRAND.name}</strong>
+          <strong>{isAm ? t('churchName', 'ደብረ ምሕረት ቅድስት ማርያም') : BRAND.name}</strong>
           <span className="sidebar-role-badge">{userRoleLabel}</span>
         </div>
       </div>
 
       <nav className="side-nav">
-        {navItems.map((item) => (
-          <a
-            key={item.id}
-            className={`side-link ${item.active ? 'active' : ''}`.trim()}
-            href={item.href}
-            onClick={(e) => {
-              if (item.href === '#') e.preventDefault();
-            }}
-          >
-            <span className="ico">{item.icon}</span>
-            <span className="label">{item.label}</span>
-          </a>
-        ))}
+        {navItems.map((item) => {
+          const translatedLabel = NAV_TRANSLATIONS[item.id]?.[language] || item.label;
+          return (
+            <a
+              key={item.id}
+              className={`side-link ${item.active ? 'active' : ''}`.trim()}
+              href={item.href}
+              onClick={(e) => {
+                if (item.href === '#') e.preventDefault();
+              }}
+            >
+              <span className="ico">{item.icon}</span>
+              <span className="label">{translatedLabel}</span>
+            </a>
+          );
+        })}
       </nav>
 
       <div className="sidebar-footer">
         <div className="church-silhouette mini"></div>
-        <p>Faith • Community<br />Service • Together</p>
-        <span>All for the Glory of God</span>
+        <p>{isAm ? <>እምነት • ማኅበር<br />አገልግሎት • አብረን</> : <>Faith • Community<br />Service • Together</>}</p>
+        <span>{isAm ? 'ሁሉ ለእግዚአብሔር ክብር' : 'All for the Glory of God'}</span>
         <small>© 2026 HNKMSM-EOTC-LV-NV</small>
         {onSignOut && (
           <button
@@ -65,7 +91,7 @@ export default function Sidebar({ navItems, isDesktopExpanded, isMobileOpen, onT
               cursor: 'pointer',
             }}
           >
-            Sign Out
+            {isAm ? 'ውጡ (Sign Out)' : 'Sign Out'}
           </button>
         )}
       </div>

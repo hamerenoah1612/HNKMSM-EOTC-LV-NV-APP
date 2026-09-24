@@ -3,6 +3,7 @@ import { CHURCH_CONTACT_INFO } from '../../data/churchContent.ts';
 import heroChurch from '../../assets/hero-church.png';
 import logo from '../../assets/logo-cross.png';
 import { BRAND } from '../../data/content.js';
+import { useLanguage } from '../../context/LanguageContext';
 
 export default function ContactPage({ onBackToSite, onSignIn, onNavigateAbout }) {
   const [formState, setFormState] = useState({
@@ -13,6 +14,8 @@ export default function ContactPage({ onBackToSite, onSignIn, onNavigateAbout })
     message: '',
   });
   const [sent, setSent] = useState(false);
+  const { language, toggleLanguage, t } = useLanguage();
+  const isAm = language === 'am';
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,18 +35,44 @@ export default function ContactPage({ onBackToSite, onSignIn, onNavigateAbout })
           >
             <img className="brand-logo" src={logo} alt="" width="40" height="48" />
             <div className="brand-copy">
-              <span className="brand-name">{BRAND.name}</span>
-              <span className="brand-tagline">{BRAND.tagline}</span>
+              <span className="brand-name">{isAm ? t('churchName', 'ደብረ ምሕረት ቅድስት ማርያም') : BRAND.name}</span>
+              <span className="brand-tagline">{isAm ? 'የኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ቤተክርስቲያን' : BRAND.tagline}</span>
             </div>
           </button>
 
-          <nav className="main-nav" style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <nav className="main-nav" style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '12px' }}>
+            {/* Language Switcher matching login page */}
+            <button
+              id="contact-lang-toggle"
+              type="button"
+              onClick={toggleLanguage}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-[#f3e7da] hover:bg-[#ebd9c7] text-[#5a331c] border border-[#d6beaa] transition-colors cursor-pointer shadow-xs select-none"
+              title={isAm ? 'Switch to English' : 'ወደ አማርኛ ቀይር (Switch to Amharic)'}
+              aria-label="Toggle Language"
+            >
+              <svg
+                className="w-3.5 h-3.5 text-[#8a4a25] shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                width="14"
+                height="14"
+              >
+                <circle cx="12" cy="12" r="10" strokeWidth="2" />
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" strokeWidth="2" />
+                <path d="M2 12h20" strokeWidth="2" />
+              </svg>
+              <span className="font-bold tracking-wide">
+                {language === 'en' ? 'አማርኛ' : 'English'}
+              </span>
+            </button>
+
             <button
               type="button"
               className="btn btn-secondary btn-sm"
               onClick={onBackToSite}
             >
-              ← Back to Home
+              {isAm ? '← ወደ ዋና ገጽ' : '← Back to Home'}
             </button>
             {onNavigateAbout && (
               <button
@@ -51,7 +80,7 @@ export default function ContactPage({ onBackToSite, onSignIn, onNavigateAbout })
                 className="btn btn-secondary btn-sm"
                 onClick={onNavigateAbout}
               >
-                About Us
+                {isAm ? 'ስለ እኛ' : 'About Us'}
               </button>
             )}
             {onSignIn && (
@@ -60,7 +89,7 @@ export default function ContactPage({ onBackToSite, onSignIn, onNavigateAbout })
                 className="btn btn-primary btn-sm"
                 onClick={() => onSignIn('member')}
               >
-                Sign In
+                {isAm ? 'ይግቡ' : 'Sign In'}
               </button>
             )}
           </nav>
@@ -71,8 +100,10 @@ export default function ContactPage({ onBackToSite, onSignIn, onNavigateAbout })
       <div className="standalone-hero">
         <img className="standalone-hero-art" src={heroChurch} alt="" aria-hidden="true" />
         <div className="container standalone-hero-inner">
-          <p className="eyebrow" style={{ color: '#ddb892' }}>Parish Sanctuary &amp; Office</p>
-          <h1>Contact Us &amp; Visit</h1>
+          <p className="eyebrow" style={{ color: '#ddb892' }}>
+            {isAm ? 'የደብሩ መቅደስና ቢሮ' : 'Parish Sanctuary & Office'}
+          </p>
+          <h1>{isAm ? 'ያግኙንና ይጎብኙን' : 'Contact Us & Visit'}</h1>
           <p className="standalone-hero-lead">
             Whether you are planning a visit, seeking pastoral prayer, inquiring about sacraments, or connecting with community ministry, our clergy and parish servants are here for you.
           </p>

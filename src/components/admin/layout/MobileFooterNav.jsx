@@ -1,4 +1,16 @@
+import { useLanguage } from '../../../context/LanguageContext';
+
+const ADMIN_MOBILE_LABELS = {
+  overview: { en: 'Home', am: 'ዋና ገጽ' },
+  members: { en: 'Members', am: 'አባላት' },
+  quick: { en: 'Quick', am: 'ፈጣን' },
+  reports: { en: 'Reports', am: 'ሪፖርቶች' },
+};
+
 export default function MobileFooterNav({ items, onMore }) {
+  const { language } = useLanguage();
+  const isAm = language === 'am';
+
   return (
     <nav className="mobile-footer">
       {items.map((item) => (
@@ -11,12 +23,12 @@ export default function MobileFooterNav({ items, onMore }) {
           }}
         >
           <span>{item.icon}</span>
-          <small>{item.label}</small>
+          <small>{ADMIN_MOBILE_LABELS[item.id]?.[language] || item.label}</small>
         </a>
       ))}
       <button type="button" id="moreBtn" onClick={onMore}>
         <span>☰</span>
-        <small>More</small>
+        <small>{isAm ? 'ተጨማሪ' : 'More'}</small>
       </button>
     </nav>
   );

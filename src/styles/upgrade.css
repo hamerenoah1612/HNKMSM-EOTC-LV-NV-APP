@@ -156,17 +156,25 @@ html{scroll-padding-top:80px}
   .mobile-nav{
     display:grid;grid-template-columns:repeat(6,1fr);gap:2px;
     position:fixed;left:0;right:0;bottom:0;z-index:120;
-    padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px));
-    background:rgba(255,255,255,.96);backdrop-filter:blur(14px);
+    padding:5px 4px calc(5px + env(safe-area-inset-bottom,0px));
+    background:rgba(255,255,255,.98);backdrop-filter:blur(14px);
     border-top:1px solid var(--line);box-shadow:0 -8px 24px rgba(59,42,33,.08);
+    align-items:stretch;
   }
-  .mobile-nav a{
-    display:flex;flex-direction:column;align-items:center;gap:3px;
-    padding:7px 2px 6px;border-radius:12px;
+  .mobile-nav a,
+  .mobile-nav .mobile-nav-more-btn{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+    padding:6px 2px 5px;margin:0;border:none;background:transparent;
+    border-radius:10px;width:100%;box-sizing:border-box;
     font-size:.64rem;font-weight:500;color:var(--muted);
     transition:background .18s ease,color .18s ease;
+    cursor:pointer;font-family:inherit;line-height:1.2;
+    text-align:center;
   }
-  .mobile-nav a.active{color:var(--primary);font-weight:700;background:var(--cream)}
+  .mobile-nav a.active,
+  .mobile-nav .mobile-nav-more-btn.active{
+    color:var(--primary);font-weight:700;background:var(--cream);
+  }
   body{padding-bottom:calc(68px + env(safe-area-inset-bottom,0px))}
 }
 @media (max-width:520px){
@@ -257,3 +265,115 @@ html{scroll-padding-top:80px}
   .objectives-list li{grid-template-columns:32px 1fr;gap:10px}
   .obj-num{width:30px;height:30px;font-size:.8rem}
 }
+
+/* Dashboard User Avatar and Menu Upgrades */
+.member-dashboard-wrapper .avatar,
+.admin-dashboard-wrapper .avatar {
+  overflow: hidden;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+.member-dashboard-wrapper .avatar img,
+.admin-dashboard-wrapper .avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Unified Topbar Brand Header (Before Search Bar) */
+.member-dashboard-wrapper .topbar-brand-wrap,
+.admin-dashboard-wrapper .topbar-brand-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex-shrink: 0;
+}
+
+.member-dashboard-wrapper .topbar-brand,
+.admin-dashboard-wrapper .topbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  min-width: 0;
+  flex-shrink: 0;
+  transition: opacity 0.15s ease;
+}
+
+.member-dashboard-wrapper .topbar-brand:hover,
+.admin-dashboard-wrapper .topbar-brand:hover {
+  opacity: 0.88;
+}
+
+.member-dashboard-wrapper .topbar-brand .brand-logo,
+.admin-dashboard-wrapper .topbar-brand .brand-logo {
+  height: 42px;
+  width: auto;
+  max-height: 44px;
+  object-fit: contain;
+  flex-shrink: 0;
+  border-radius: 6px;
+}
+
+.member-dashboard-wrapper .topbar-brand .brand-copy,
+.admin-dashboard-wrapper .topbar-brand .brand-copy {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.member-dashboard-wrapper .topbar-brand .brand-name,
+.admin-dashboard-wrapper .topbar-brand .brand-name {
+  font-family: Georgia, serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--ink, #342017);
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+
+.member-dashboard-wrapper .topbar-brand .brand-tagline,
+.admin-dashboard-wrapper .topbar-brand .brand-tagline {
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--muted, #6d625d);
+  white-space: nowrap;
+  margin-top: 2px;
+}
+
+/* Ensure mobile menu button is hidden on desktop */
+@media (min-width: 900px) {
+  .member-dashboard-wrapper .mobile-menu-btn {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .admin-dashboard-wrapper .mobile-menu-btn {
+    display: none !important;
+  }
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 600px) {
+  .member-dashboard-wrapper .topbar-brand .brand-logo,
+  .admin-dashboard-wrapper .topbar-brand .brand-logo {
+    height: 34px;
+  }
+  .member-dashboard-wrapper .topbar-brand .brand-name,
+  .admin-dashboard-wrapper .topbar-brand .brand-name {
+    font-size: 0.82rem;
+  }
+  .member-dashboard-wrapper .topbar-brand .brand-tagline,
+  .admin-dashboard-wrapper .topbar-brand .brand-tagline {
+    font-size: 0.65rem;
+  }
+}
+
+

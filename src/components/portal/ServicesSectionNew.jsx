@@ -1,10 +1,22 @@
 import React, { useState } from 'react';
 import { SERVICES_CATALOG } from '../../data/landingPortalData.js';
 import heroChurch from '../../assets/hero-church.png';
+import { useLanguage } from '../../context/LanguageContext';
+
+const CATEGORY_MAP = {
+  All: { en: 'All', am: 'ሁሉም' },
+  'Sacramental Worship': { en: 'Sacramental Worship', am: 'የቅዳሴ ስግደት' },
+  'Prayer & Vigil': { en: 'Prayer & Vigil', am: 'ጸሎትና ትጋት' },
+  Sacraments: { en: 'Sacraments', am: 'ምስጢራት' },
+  'Pastoral Care': { en: 'Pastoral Care', am: 'የካህናት አገልግሎት' },
+  Memorial: { en: 'Memorial', am: 'ፍትሐትና መታሰቢያ' },
+};
 
 export default function ServicesSectionNew({ onBookService, onSignIn }) {
   const [selectedService, setSelectedService] = useState(null);
   const [activeCategory, setActiveCategory] = useState('All');
+  const { language } = useLanguage();
+  const isAm = language === 'am';
 
   const categories = ['All', 'Sacramental Worship', 'Prayer & Vigil', 'Sacraments', 'Pastoral Care', 'Memorial'];
 
@@ -20,11 +32,15 @@ export default function ServicesSectionNew({ onBookService, onSignIn }) {
       <div className="container objectives-inner">
         <div className="objectives-copy">
           <p className="eyebrow" style={{ color: '#7f5539', marginBottom: '4px', textTransform: 'uppercase', letterSpacing: '0.08em', fontSize: '0.76rem', fontWeight: 700 }}>
-            Holy Sacraments &amp; Liturgy
+            {isAm ? 'ቅዱሳት ምስጢራትና ቅዳሴ' : 'Holy Sacraments & Liturgy'}
           </p>
-          <h2 id="services-heading">Parish Sacramental &amp; Liturgical Services</h2>
+          <h2 id="services-heading">
+            {isAm ? 'የሰበካው ምስጢራተ ቤተክርስቲያንና የቅዳሴ አገልግሎቶች' : 'Parish Sacramental & Liturgical Services'}
+          </h2>
           <p>
-            Experience the fullness of ancient Orthodox sacramental life, from weekly Divine Liturgy (Kidase) to pastoral care.
+            {isAm
+              ? 'ከሳምንታዊ ቅዳሴ እስከ ካህናት ምክርና ጸሎት ድረስ ያለውን የኦርቶዶክሳዊት ቤተክርስቲያናችንን ቅዱሳት አገልግሎቶች ይሳተፉ።'
+              : 'Experience the fullness of ancient Orthodox sacramental life, from weekly Divine Liturgy (Kidase) to pastoral care.'}
           </p>
         </div>
 
@@ -37,7 +53,7 @@ export default function ServicesSectionNew({ onBookService, onSignIn }) {
               className={`obj-filter-pill ${activeCategory === cat ? 'active' : ''}`}
               onClick={() => setActiveCategory(cat)}
             >
-              {cat}
+              {CATEGORY_MAP[cat]?.[language] || cat}
             </button>
           ))}
         </div>
@@ -56,9 +72,11 @@ export default function ServicesSectionNew({ onBookService, onSignIn }) {
                 ✝
               </span>
               <strong>{service.title}</strong>
-              <small className="tile-category-tag">{service.badge} • {service.category}</small>
+              <small className="tile-category-tag">
+                {service.badge} • {CATEGORY_MAP[service.category]?.[language] || service.category}
+              </small>
               <p className="tile-summary-text">{service.summary}</p>
-              <span className="tile-click-action">View &amp; Book →</span>
+              <span className="tile-click-action">{isAm ? 'ዝርዝር ይመልከቱ →' : 'View & Book →'}</span>
             </div>
           ))}
         </div>
@@ -85,18 +103,21 @@ export default function ServicesSectionNew({ onBookService, onSignIn }) {
               <p className="modal-lead">{selectedService.summary}</p>
               <div className="modal-info-list">
                 <div>
-                  <strong>Category:</strong> <span>{selectedService.category}</span>
+                  <strong>{isAm ? 'ምድብ:' : 'Category:'}</strong> <span>{CATEGORY_MAP[selectedService.category]?.[language] || selectedService.category}</span>
                 </div>
                 <div>
-                  <strong>Schedule &amp; Hours:</strong> <span>{selectedService.schedule}</span>
+                  <strong>{isAm ? 'ሰዓትና ቀን:' : 'Schedule & Hours:'}</strong> <span>{selectedService.schedule}</span>
                 </div>
                 <div>
-                  <strong>Location:</strong> <span>{selectedService.location}</span>
+                  <strong>{isAm ? 'ቦታ:' : 'Location:'}</strong> <span>{selectedService.location}</span>
                 </div>
               </div>
               <div className="modal-note-box">
                 <p>
-                  <em>Note:</em> For Holy Sacraments (Baptism, Matrimony, Confession), please schedule with the Parish Priest at least two weeks in advance.
+                  <em>{isAm ? 'ማሳሰቢያ:' : 'Note:'}</em>{' '}
+                  {isAm
+                    ? 'ለቅዱሳት ምስጢራት (ጥምቀት፣ ተክሊል፣ ንስሐ) እባክዎ ከሁለት ሳምንት በፊት ከደብሩ ካህናት ጋር ቀጠሮ ይያዙ።'
+                    : 'For Holy Sacraments (Baptism, Matrimony, Confession), please schedule with the Parish Priest at least two weeks in advance.'}
                 </p>
               </div>
             </div>
@@ -106,7 +127,7 @@ export default function ServicesSectionNew({ onBookService, onSignIn }) {
                 className="btn btn-secondary"
                 onClick={() => setSelectedService(null)}
               >
-                Close
+                {isAm ? 'ዝጋ' : 'Close'}
               </button>
               <button
                 type="button"
@@ -117,7 +138,7 @@ export default function ServicesSectionNew({ onBookService, onSignIn }) {
                   else if (onSignIn) onSignIn('member');
                 }}
               >
-                Proceed with Inquiry
+                {isAm ? 'ይቀጥሉ' : 'Proceed with Inquiry'}
               </button>
             </div>
           </div>

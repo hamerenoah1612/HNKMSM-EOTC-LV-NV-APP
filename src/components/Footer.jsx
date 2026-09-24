@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import { BRAND, SOCIALS } from '../data/content.js';
 import Icon from './Icon.jsx';
 import logo from '../assets/logo-cross.png';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Footer({ onSignIn, onOpenTerms, onOpenPrivacy, onNavigateAbout, onNavigateContact }) {
   const currentYear = new Date().getFullYear();
   const [moreOpen, setMoreOpen] = useState(false);
+  const { language, t } = useLanguage();
+  const isAm = language === 'am';
 
   return (
     <footer className="site-footer">
@@ -14,17 +17,33 @@ export default function Footer({ onSignIn, onOpenTerms, onOpenPrivacy, onNavigat
           <img className="brand-logo" src={logo} alt="" width="36" height="42" />
           <div>
             <strong>{BRAND.name}</strong>
-            <small>{BRAND.denomination}</small>
+            <small>{isAm ? 'የኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ቤተክርስቲያን' : BRAND.denomination}</small>
           </div>
         </div>
 
         {/* Structured Desktop & Mobile / Tablet Navigation */}
         <nav className="footer-nav" aria-label="Footer navigation">
           {/* Main Primary Links */}
-          <a href="#home">Home</a>
-          <a href="#services">Services</a>
-          <a href="#events">Events</a>
-          <a href="#giving">Donations</a>
+          <a href="#home" className="footer-nav-link">
+            <Icon name="home" size={15} />
+            <span>{t('navHome', 'Home')}</span>
+          </a>
+          <a href="#services" className="footer-nav-link">
+            <Icon name="church" size={15} />
+            <span>{t('navServices', 'Services')}</span>
+          </a>
+          <a href="#events" className="footer-nav-link">
+            <Icon name="calendar" size={15} />
+            <span>{t('navEvents', 'Events')}</span>
+          </a>
+          <a href="#church-school" className="footer-nav-link">
+            <Icon name="school" size={15} />
+            <span>{t('navSchool', 'School')}</span>
+          </a>
+          <a href="#giving" className="footer-nav-link">
+            <Icon name="heart" size={15} />
+            <span>{t('navDonations', 'Donations')}</span>
+          </a>
 
           {/* More Dropdown / Expandable in Footer */}
           <div className="footer-more-container">
@@ -34,17 +53,17 @@ export default function Footer({ onSignIn, onOpenTerms, onOpenPrivacy, onNavigat
               onClick={() => setMoreOpen(!moreOpen)}
               aria-expanded={moreOpen}
             >
-              More ({moreOpen ? '▲' : '▼'})
+              <span>{t('more', 'More')}</span>
+              <small style={{ fontSize: '0.65rem', marginLeft: '2px' }}>{moreOpen ? '▲' : '▼'}</small>
             </button>
 
             {moreOpen && (
               <div className="footer-more-dropdown">
-                <a href="#features" onClick={() => setMoreOpen(false)}>Features</a>
-                <a href="#news" onClick={() => setMoreOpen(false)}>News</a>
-                <a href="#multimedia" onClick={() => setMoreOpen(false)}>Multimedia</a>
-                <a href="#learning" onClick={() => setMoreOpen(false)}>Learning</a>
-                <a href="#church-school" onClick={() => setMoreOpen(false)}>Church School</a>
-                <a href="#shop" onClick={() => setMoreOpen(false)}>Shop</a>
+                <a href="#features" onClick={() => setMoreOpen(false)}>{t('navFeatures', 'Features')}</a>
+                <a href="#news" onClick={() => setMoreOpen(false)}>{t('navNews', 'News')}</a>
+                <a href="#multimedia" onClick={() => setMoreOpen(false)}>{t('navMultimedia', 'Multimedia')}</a>
+                <a href="#learning" onClick={() => setMoreOpen(false)}>{t('navLearning', 'Learning')}</a>
+                <a href="#shop" onClick={() => setMoreOpen(false)}>{t('navShop', 'Shop')}</a>
                 <button
                   type="button"
                   className="footer-sub-link-btn"
@@ -54,7 +73,7 @@ export default function Footer({ onSignIn, onOpenTerms, onOpenPrivacy, onNavigat
                     else window.location.hash = '#about';
                   }}
                 >
-                  About Us
+                  {t('navAboutUs', 'About Us')}
                 </button>
                 <button
                   type="button"
@@ -65,7 +84,7 @@ export default function Footer({ onSignIn, onOpenTerms, onOpenPrivacy, onNavigat
                     else window.location.hash = '#contact';
                   }}
                 >
-                  Contact
+                  {t('navContact', 'Contact')}
                 </button>
               </div>
             )}
@@ -77,7 +96,8 @@ export default function Footer({ onSignIn, onOpenTerms, onOpenPrivacy, onNavigat
               onClick={() => onSignIn('member')}
               className="footer-signin-btn"
             >
-              Sign In
+              <Icon name="user" size={14} />
+              <span>{t('signIn', 'Sign In')}</span>
             </button>
           )}
         </nav>
@@ -98,7 +118,7 @@ export default function Footer({ onSignIn, onOpenTerms, onOpenPrivacy, onNavigat
               className="footer-legal-btn"
               onClick={onOpenTerms}
             >
-              Terms &amp; Conditions
+              {isAm ? 'ውሎችና ደንቦች' : 'Terms & Conditions'}
             </button>
             <span className="legal-sep">•</span>
             <button
@@ -106,11 +126,11 @@ export default function Footer({ onSignIn, onOpenTerms, onOpenPrivacy, onNavigat
               className="footer-legal-btn"
               onClick={onOpenPrivacy}
             >
-              Privacy Policy
+              {isAm ? 'የግላዊነት ፖሊሲ' : 'Privacy Policy'}
             </button>
           </div>
 
-          <small>© {currentYear} {BRAND.name}. All rights reserved.</small>
+          <small>© {currentYear} {BRAND.name}. {isAm ? 'መብቱ በሕግ የተጠበቀ ነው።' : 'All rights reserved.'}</small>
         </div>
       </div>
     </footer>

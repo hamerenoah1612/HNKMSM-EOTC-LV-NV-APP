@@ -5,7 +5,7 @@ import Icon from './Icon.jsx';
 import logo from '../assets/logo-cross.png';
 import { useLanguage } from '../context/LanguageContext';
 
-const SECTION_IDS = ['home', 'services', 'events', 'giving', 'about', 'contact'];
+const SECTION_IDS = ['home', 'services', 'events', 'church-school', 'giving', 'about', 'contact'];
 
 export default function Navbar({
   onSignIn,
@@ -77,11 +77,11 @@ export default function Navbar({
   return (
     <header className="site-header">
       <div className="container header-inner">
-        {/* Brand */}
+        {/* Brand - Nav Site Title is excluded from language toggle */}
         <a className="brand" href="#home" aria-label={`${BRAND.name} home`}>
           <img className="brand-logo" src={logo} alt="" width="40" height="48" />
           <div className="brand-copy">
-            <span className="brand-name">{language === 'am' ? t('churchName', 'ደብረ ምሕረት ቅድስት ማርያም') : BRAND.name}</span>
+            <span className="brand-name">{BRAND.name}</span>
             <span className="brand-tagline">{language === 'am' ? 'የኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ቤተክርስቲያን' : BRAND.tagline}</span>
           </div>
         </a>
@@ -108,6 +108,13 @@ export default function Navbar({
             onClick={handleNavAnchorClick}
           >
             {t('navEvents', 'Events')}
+          </a>
+          <a
+            href="#church-school"
+            className={active === 'church-school' ? 'active' : undefined}
+            onClick={handleNavAnchorClick}
+          >
+            {t('navSchool', 'School')}
           </a>
           <a
             href="#giving"
@@ -144,9 +151,6 @@ export default function Navbar({
                 <a href="#learning" onClick={handleNavAnchorClick} role="menuitem">
                   {t('navLearning', 'Learning')}
                 </a>
-                <a href="#church-school" onClick={handleNavAnchorClick} role="menuitem">
-                  {t('navChurchSchool', 'Church School')}
-                </a>
                 <a href="#shop" onClick={handleNavAnchorClick} role="menuitem">
                   {t('navShop', 'Shop')}
                 </a>
@@ -164,11 +168,25 @@ export default function Navbar({
                 >
                   {t('navContact', 'Contact')}
                 </button>
+                <div style={{ height: '1px', background: 'var(--line)', margin: '4px 0' }} />
+                <button
+                  type="button"
+                  onClick={() => {
+                    toggleLanguage();
+                    setMoreOpen(false);
+                  }}
+                  role="menuitem"
+                  className="nav-more-lang-item"
+                  style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--primary)', fontWeight: 600 }}
+                >
+                  <span>🌐</span>
+                  <span>{language === 'en' ? 'ቋንቋ: ወደ አማርኛ ቀይር' : 'Language: Switch to English'}</span>
+                </button>
               </div>
             )}
           </div>
 
-          {/* Language Switcher */}
+          {/* Language Switcher for Desktop */}
           <button
             id="navbar-lang-toggle"
             type="button"
@@ -223,18 +241,8 @@ export default function Navbar({
           )}
         </nav>
 
-        {/* Mobile Header Actions (Sign-in icon + Language toggle + Menu Hamburger) */}
+        {/* Mobile & Tablet Header Actions (Sign-in + Menu Hamburger) - Language toggle moved into More menu */}
         <div className="header-mobile-actions">
-          {/* Mobile Language Switcher */}
-          <button
-            type="button"
-            onClick={toggleLanguage}
-            className="nav-lang-btn-mobile"
-            title={language === 'en' ? 'ወደ አማርኛ ቀይር' : 'Switch to English'}
-          >
-            🌐 <span>{language === 'en' ? 'አማርኛ' : 'EN'}</span>
-          </button>
-
           {user ? (
             <button
               type="button"
@@ -271,14 +279,21 @@ export default function Navbar({
         {/* Mobile & Tablet Dropdown Navigation Menu */}
         {mobileMenuOpen && (
           <div className="mobile-nav-menu is-open" role="dialog" aria-label="Mobile Navigation">
-            <div style={{ padding: '8px 16px', display: 'flex', justifyContent: 'center' }}>
+            {/* Language toggle placed prominently in More menu for Mobile & Tablet */}
+            <div style={{ padding: '8px 4px 10px', display: 'flex', justifyContent: 'center' }}>
               <button
                 type="button"
                 onClick={toggleLanguage}
                 className="nav-lang-btn"
-                style={{ width: '100%', justifyContent: 'center', padding: '8px 16px' }}
+                style={{ width: '100%', justifyContent: 'space-between', padding: '10px 16px', fontSize: '0.82rem' }}
               >
-                🌐 <span>{language === 'en' ? 'ቋንቋ: አማርኛ (Switch to Amharic)' : 'Language: English'}</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span>🌐</span>
+                  <span>{language === 'en' ? 'ቋንቋ: ወደ አማርኛ ቀይር' : 'Language: Switch to English'}</span>
+                </div>
+                <span style={{ background: '#7f5539', color: '#fff', padding: '2px 8px', borderRadius: '9999px', fontSize: '0.72rem' }}>
+                  {language === 'en' ? 'አማርኛ' : 'EN'}
+                </span>
               </button>
             </div>
 
@@ -304,6 +319,13 @@ export default function Navbar({
               {t('navEvents', 'Events')}
             </a>
             <a
+              href="#church-school"
+              className={active === 'church-school' ? 'active' : undefined}
+              onClick={handleNavAnchorClick}
+            >
+              {t('navSchool', 'School')}
+            </a>
+            <a
               href="#giving"
               className={active === 'giving' ? 'active' : undefined}
               onClick={handleNavAnchorClick}
@@ -324,9 +346,6 @@ export default function Navbar({
             </a>
             <a href="#learning" onClick={handleNavAnchorClick}>
               {t('navLearning', 'Learning')}
-            </a>
-            <a href="#church-school" onClick={handleNavAnchorClick}>
-              {t('navChurchSchool', 'Church School')}
             </a>
             <a href="#shop" onClick={handleNavAnchorClick}>
               {t('navShop', 'Shop')}

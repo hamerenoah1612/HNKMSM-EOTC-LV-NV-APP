@@ -24,7 +24,7 @@ export default function AppShell({ user, onSignOut, onBackToSite, children }) {
         <div className="app-main">
           <Topbar
             user={user}
-            onOpenMobileMenu={openMobile}
+            onOpenMobileMenu={toggleSidebar}
             onSignOut={onSignOut}
             onBackToSite={onBackToSite}
           />

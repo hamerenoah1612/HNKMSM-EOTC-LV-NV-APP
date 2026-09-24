@@ -1,30 +1,33 @@
 import React, { useState } from 'react';
 import useActiveSection from '../hooks/useActiveSection.js';
 import Icon from './Icon.jsx';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function MobileNav({ onNavigateAbout, onNavigateContact }) {
   const [moreOpen, setMoreOpen] = useState(false);
+  const { language, toggleLanguage, t } = useLanguage();
+  const isAm = language === 'am';
 
   const primaryItems = [
-    { id: 'home', label: 'Home', icon: 'home' },
-    { id: 'services', label: 'Services', icon: 'church' },
-    { id: 'events', label: 'Events', icon: 'calendar' },
-    { id: 'giving', label: 'Donations', icon: 'heart' },
+    { id: 'home', label: t('navHome', 'Home'), icon: 'home' },
+    { id: 'services', label: t('navServices', 'Services'), icon: 'church' },
+    { id: 'events', label: t('navEvents', 'Events'), icon: 'calendar' },
+    { id: 'church-school', label: t('navSchool', 'School'), icon: 'school' },
+    { id: 'giving', label: t('navDonations', 'Donations'), icon: 'heart' },
   ];
 
   const primaryIds = primaryItems.map((item) => item.id);
   const active = useActiveSection(primaryIds, 'home');
 
   const moreSubItems = [
-    { id: 'features', label: 'Features', icon: 'grid', isAnchor: true },
-    { id: 'news', label: 'News', icon: 'mail', isAnchor: true },
-    { id: 'multimedia', label: 'Multimedia', icon: 'play', isAnchor: true },
-    { id: 'learning', label: 'Learning', icon: 'book', isAnchor: true },
-    { id: 'church-school', label: 'School', icon: 'award', isAnchor: true },
-    { id: 'shop', label: 'Shop', icon: 'crown', isAnchor: true },
+    { id: 'features', label: t('navFeatures', 'Features'), icon: 'grid', isAnchor: true },
+    { id: 'news', label: t('navNews', 'News'), icon: 'mail', isAnchor: true },
+    { id: 'multimedia', label: t('navMultimedia', 'Multimedia'), icon: 'play', isAnchor: true },
+    { id: 'learning', label: t('navLearning', 'Learning'), icon: 'book', isAnchor: true },
+    { id: 'shop', label: t('navShop', 'Shop'), icon: 'crown', isAnchor: true },
     {
       id: 'about',
-      label: 'About Us',
+      label: t('navAboutUs', 'About Us'),
       icon: 'shield',
       action: () => {
         setMoreOpen(false);
@@ -34,12 +37,20 @@ export default function MobileNav({ onNavigateAbout, onNavigateContact }) {
     },
     {
       id: 'contact',
-      label: 'Contact',
+      label: t('navContact', 'Contact'),
       icon: 'mail',
       action: () => {
         setMoreOpen(false);
         if (onNavigateContact) onNavigateContact();
         else window.location.hash = '#contact';
+      },
+    },
+    {
+      id: 'lang-action',
+      label: language === 'en' ? 'አማርኛ (Amharic)' : 'English',
+      icon: 'globe',
+      action: () => {
+        toggleLanguage();
       },
     },
   ];
@@ -59,15 +70,33 @@ export default function MobileNav({ onNavigateAbout, onNavigateContact }) {
             aria-label="More navigation items"
           >
             <div className="mobile-more-sheet-header">
-              <strong>More Church Sections</strong>
+              <strong>{isAm ? 'ተጨማሪ የቤተክርስቲያን ክፍሎች' : 'More Church Sections'}</strong>
               <button
                 type="button"
                 className="mobile-more-close"
                 onClick={() => setMoreOpen(false)}
+                aria-label="Close menu"
               >
                 ✕
               </button>
             </div>
+
+            {/* Prominent Language Switcher in More Menu for Mobile & Tablet */}
+            <div className="mobile-more-lang-bar">
+              <button
+                type="button"
+                className="mobile-more-lang-btn"
+                onClick={toggleLanguage}
+                title={language === 'en' ? 'ወደ አማርኛ ቀይር (Switch to Amharic)' : 'Switch to English'}
+              >
+                <div className="lang-btn-content">
+                  <Icon name="globe" size={18} />
+                  <span>{language === 'en' ? 'ቋንቋ: ወደ አማርኛ ቀይር' : 'Language: Switch to English'}</span>
+                </div>
+                <span className="lang-pill-badge">{language === 'en' ? 'አማርኛ' : 'EN'}</span>
+              </button>
+            </div>
+
             <div className="mobile-more-grid">
               {moreSubItems.map((sub) => {
                 if (sub.isAnchor) {
@@ -114,7 +143,7 @@ export default function MobileNav({ onNavigateAbout, onNavigateContact }) {
           </a>
         ))}
 
-        {/* 5th element: More button */}
+        {/* 6th element: More button */}
         <button
           type="button"
           className={`mobile-nav-more-btn ${moreOpen ? 'active' : ''}`}
@@ -123,7 +152,7 @@ export default function MobileNav({ onNavigateAbout, onNavigateContact }) {
           aria-label="More options"
         >
           <span className="more-dots-icon" aria-hidden="true">⋯</span>
-          <span>More</span>
+          <span>{isAm ? 'ተጨማሪ' : 'More'}</span>
         </button>
       </nav>
     </>
