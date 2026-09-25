@@ -138,7 +138,7 @@ export const GIVING_QUOTE = {
 
 export const SOCIALS = [
   { icon: 'facebook', label: 'Facebook', href: '#' },
-  { icon: 'youtube', label: 'YouTube', href: '#' },
+  { icon: 'youtube', label: 'YouTube', href: 'https://www.youtube.com/@HamereNoahMedia' },
   { icon: 'instagram', label: 'Instagram', href: '#' },
 ];
 
