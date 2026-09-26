@@ -1,4 +1,3 @@
-import logo from '../../../assets/logo-cross.png';
 import { BRAND } from '../../../data/content.js';
 import { useLanguage } from '../../../context/LanguageContext';
 
@@ -49,13 +48,6 @@ export default function Sidebar({
         >
           <span></span><span></span><span></span>
         </button>
-        <img
-          className="admin-logo-img"
-          src={logo}
-          alt="HNKMSM Logo"
-          width="36"
-          height="44"
-        />
         <div className="brand-copy">
           <strong>{isAm ? t('churchName', 'ደብረ ምሕረት ቅድስት ማርያም') : BRAND.name}</strong>
           <span>{isAm ? 'የኢትዮጵያ ኦርቶዶክስ ተዋሕዶ ቤተክርስቲያን' : 'Ethiopian Orthodox Tewahedo Church'}</span>

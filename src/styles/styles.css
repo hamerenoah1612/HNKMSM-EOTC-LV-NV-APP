@@ -111,7 +111,7 @@ blockquote{margin:32px 0 0;font-family:Georgia,serif;font-style:italic;color:#5d
 
 @media (max-width:520px){
   .container{width:min(calc(100% - 24px),var(--container))}.header-inner{min-height:64px}.brand-mark{font-size:28px}.brand-name{font-size:.78rem}
-  .hero-grid{padding-block:42px}.hero-visual{min-height:360px}.desktop-device{width:100%;transform:scale(.93)}.mobile-device{width:122px;right:-4px;bottom:0}
+  .hero-grid{padding-block:42px}.hero-visual{min-height:auto;width:100%}.desktop-device{width:100%;transform:none}.mobile-device{width:122px;right:-4px;bottom:0}
   .value-row{grid-template-columns:1fr 1fr}.hero-actions{flex-direction:column}.hero-actions .btn{width:100%}.section{padding:56px 0}.role-copy{padding:22px}.giving-options{grid-template-columns:1fr 1fr}.media-grid{grid-template-columns:1fr 1fr}.cta-banner{padding:24px}.cta-banner .btn{width:100%}
 }
 

@@ -1,4 +1,3 @@
-import logo from '../../assets/logo-cross.png';
 import { BRAND } from '../../data/content.js';
 import { useLanguage } from '../../context/LanguageContext';
 
@@ -44,7 +43,6 @@ export default function Sidebar({ navItems, isDesktopExpanded, isMobileOpen, onT
         >
           <span></span><span></span><span></span>
         </button>
-        <img className="sidebar-logo-img" src={logo} alt="HNKMSM Logo" width="36" height="44" />
         <div className="brand-copy">
           <strong>{isAm ? t('churchName', 'ደብረ ምሕረት ቅድስት ማርያም') : BRAND.name}</strong>
           <span className="sidebar-role-badge">{userRoleLabel}</span>

@@ -169,7 +169,7 @@
   .admin-dashboard-wrapper .side-footer{display:none}
   .admin-dashboard-wrapper .app-shell.expanded .brand{justify-content:flex-start;padding:10px 12px}
   .admin-dashboard-wrapper .app-shell.expanded .brand-copy{display:flex}
-  .admin-dashboard-wrapper .app-shell.expanded .sidebar .admin-logo-img{display:block}
+  .admin-dashboard-wrapper .sidebar .admin-logo-img{display:none !important}
   .admin-dashboard-wrapper .app-shell.expanded .nav{justify-content:flex-start;padding:0 12px}
   .admin-dashboard-wrapper .app-shell.expanded .nav b{display:block}
   .admin-dashboard-wrapper .app-shell.expanded .side-footer{display:block}

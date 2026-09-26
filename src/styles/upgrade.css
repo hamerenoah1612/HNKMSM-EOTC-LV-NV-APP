@@ -310,14 +310,29 @@ html{scroll-padding-top:80px}
   opacity: 0.88;
 }
 
+/* Dashboard Top Navigation: Hide cross image, emphasize title */
+.member-dashboard-wrapper .sidebar-logo-img,
+.member-dashboard-wrapper .topbar-logo-img,
 .member-dashboard-wrapper .topbar-brand .brand-logo,
+.admin-dashboard-wrapper .admin-logo-img,
+.admin-dashboard-wrapper .admin-topbar-logo-img,
 .admin-dashboard-wrapper .topbar-brand .brand-logo {
-  height: 42px;
-  width: auto;
-  max-height: 44px;
-  object-fit: contain;
-  flex-shrink: 0;
-  border-radius: 6px;
+  display: none !important;
+}
+
+.member-dashboard-wrapper .sidebar-brand,
+.admin-dashboard-wrapper .brand {
+  gap: 12px;
+}
+
+.member-dashboard-wrapper .sidebar-brand .brand-copy strong,
+.admin-dashboard-wrapper .brand .brand-copy strong {
+  font-family: Georgia, serif;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--ink, #342017);
+  letter-spacing: -0.01em;
+  line-height: 1.25;
 }
 
 .member-dashboard-wrapper .topbar-brand .brand-copy,
@@ -377,50 +392,24 @@ html{scroll-padding-top:80px}
 }
 
 /* ==========================================================================
-   YouTube Hero Video Screens (Laptop & Mobile)
+   YouTube Hero Video Screens (Auto Responsive across All Devices)
    ========================================================================== */
 .hero-visual-wrapper {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
   position: relative;
   z-index: 2;
 }
 
-.hero-device-toggle {
-  display: none;
+.hero-visual.auto-device-screen {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 4px;
-  background: rgba(255, 255, 255, 0.82);
-  border: 1px solid rgba(127, 85, 57, 0.22);
-  border-radius: 24px;
-  backdrop-filter: blur(10px);
-  margin: 0 auto 4px;
-  box-shadow: 0 4px 14px rgba(59, 42, 33, 0.08);
-}
-
-.device-toggle-btn {
-  border: none;
-  background: transparent;
-  padding: 5px 12px;
-  border-radius: 18px;
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: var(--muted);
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  transition: all 0.16s ease;
-}
-
-.device-toggle-btn.active {
-  background: var(--primary);
-  color: #fff;
-  box-shadow: 0 2px 8px rgba(127, 85, 57, 0.32);
 }
 
 .yt-desktop-frame {
@@ -429,8 +418,11 @@ html{scroll-padding-top:80px}
   box-shadow: 0 24px 60px rgba(20, 10, 5, 0.45), 0 2px 10px rgba(0, 0, 0, 0.3) !important;
   padding: 8px !important;
   border-radius: 18px !important;
-  overflow: visible;
-  width: min(100%, 640px);
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+  width: 100%;
+  max-width: 660px;
+  transition: all 0.2s ease;
 }
 
 .yt-device-bar {
@@ -581,26 +573,36 @@ html{scroll-padding-top:80px}
 .yt-player-viewport {
   position: relative;
   width: 100%;
+  max-width: 100%;
   aspect-ratio: 16 / 9;
   background: #000;
   overflow: hidden;
+  border-radius: 6px 6px 0 0;
 }
 
 .yt-iframe-wrap {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  position: relative;
+  overflow: hidden;
 }
 
 .yt-embed-iframe {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
   border: 0;
   display: block;
 }
 
 .yt-video-poster {
-  position: relative;
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   background-size: cover;
@@ -610,6 +612,7 @@ html{scroll-padding-top:80px}
   flex-direction: column;
   justify-content: space-between;
   padding: 10px 12px;
+  box-sizing: border-box;
 }
 
 .yt-poster-top {
@@ -1274,151 +1277,378 @@ html{scroll-padding-top:80px}
   background: #ff0000;
 }
 
-/* ---------- Universal Device Responsiveness ---------- */
+/* ---------- Church Companion Card (Auto Responsive) ---------- */
+.yt-church-companion-card {
+  background: #141418;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  padding: 10px 12px;
+  color: #fff;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.yt-companion-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.yt-companion-brand {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+}
+
+.yt-companion-logo {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #fff;
+  padding: 2px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.yt-companion-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.yt-companion-info strong {
+  font-size: 0.68rem;
+  color: #fff;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.yt-companion-info span {
+  font-size: 0.58rem;
+  color: #ff8a65;
+}
+
+.yt-companion-sub {
+  background: #cc0000;
+  color: #fff;
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 12px;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: background 0.15s ease;
+}
+.yt-companion-sub:hover {
+  background: #ff0000;
+}
+
+.yt-companion-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.yt-companion-status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.58rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.yt-companion-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #27c93f;
+  box-shadow: 0 0 6px #27c93f;
+}
+
+.yt-companion-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+}
+
+.yt-comp-btn-watch {
+  background: #cc0000;
+  color: #fff;
+  font-size: 0.58rem;
+  font-weight: 700;
+  padding: 4px 6px;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  white-space: nowrap;
+}
+.yt-comp-btn-watch:hover {
+  background: #ff0000;
+}
+
+.yt-comp-btn-channel {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 0.58rem;
+  font-weight: 600;
+  padding: 4px 6px;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  white-space: nowrap;
+}
+.yt-comp-btn-channel:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* ---------- Universal Auto Device Responsiveness ---------- */
 @media (min-width: 900px) {
-  .hero-visual {
-    min-height: 470px;
+  .hero-visual.auto-device-screen {
+    min-height: 480px;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
+    width: 100%;
+    max-width: 100%;
   }
-  .view-mode-both .desktop-device {
-    width: min(100%, 640px);
-  }
-  .view-mode-both .mobile-device {
-    position: absolute;
-    right: -8px;
-    bottom: 8px;
-    width: 156px !important;
+  .yt-desktop-frame.desktop-device {
+    width: 100%;
+    max-width: 660px;
+    transform: none !important;
   }
 }
 
 @media (max-width: 899px) {
-  .hero-device-toggle {
-    display: inline-flex;
-  }
-  .hero-visual {
-    min-height: auto;
-    width: 100%;
-    max-width: 620px;
+  .hero-visual.auto-device-screen {
+    min-height: 0 !important;
+    height: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
     margin: 0 auto;
     position: relative;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    align-items: stretch;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
   }
-  .hero-visual.view-mode-mobile {
-    justify-content: center;
-  }
-  .view-mode-both .desktop-device {
-    width: 100%;
-  }
-  .view-mode-both .mobile-device {
-    position: absolute;
-    right: 0;
-    bottom: 4px;
-    width: 140px !important;
+  .yt-desktop-frame.desktop-device {
+    width: 100% !important;
+    max-width: 100% !important;
+    transform: none !important;
+    box-sizing: border-box !important;
   }
 }
 
 @media (max-width: 640px) {
-  .hero-device-toggle {
-    display: inline-flex;
-    width: 100%;
-    max-width: 360px;
-    justify-content: space-between;
+  .hero-visual-wrapper {
+    gap: 10px;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
   }
-  .device-toggle-btn {
-    padding: 5px 8px;
-    font-size: 0.65rem;
-    flex: 1;
-    justify-content: center;
+  .hero-visual.auto-device-screen {
+    min-height: 0 !important;
+    height: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
   .yt-desktop-frame {
     width: 100% !important;
-    padding: 6px !important;
-    border-radius: 14px !important;
+    max-width: 100% !important;
+    padding: 4px !important;
+    border-radius: 12px !important;
+    transform: none !important;
+    box-sizing: border-box !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
   }
   .yt-device-bar {
     height: 34px !important;
     padding: 0 8px !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
   }
-  .yt-channel-badge, .yt-divider {
-    display: none;
+  .yt-channel-badge,
+  .yt-divider {
+    display: none !important;
   }
-  .yt-info-bar {
-    padding: 6px 8px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
+  .yt-bar-actions {
+    gap: 4px;
   }
-  .yt-action-buttons {
-    width: 100%;
-    justify-content: space-between;
+  .yt-watch-direct-btn,
+  .yt-top-channel-btn {
+    padding: 3px 6px !important;
+    font-size: 0.62rem !important;
   }
-  .yt-subscribe-btn, .yt-channel-action-btn {
-    padding: 4px 8px;
-    font-size: 0.6rem;
-    flex: 1;
-    text-align: center;
+  .yt-player-viewport {
+    width: 100% !important;
+    max-width: 100% !important;
+    aspect-ratio: 16 / 9 !important;
   }
-  .view-mode-both .yt-mobile-frame {
-    width: 120px !important;
-    right: -4px !important;
-    bottom: -6px !important;
-  }
-  .yt-video-title {
-    font-size: 0.78rem;
-  }
-  .yt-video-sub {
-    font-size: 0.64rem;
+  .yt-video-poster {
+    padding: 6px 8px !important;
   }
   .yt-play-circle {
-    width: 46px;
-    height: 46px;
+    width: 44px !important;
+    height: 44px !important;
   }
   .yt-play-triangle {
-    font-size: 16px;
+    font-size: 16px !important;
+  }
+  .yt-video-title {
+    font-size: 0.78rem !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+  .yt-video-sub {
+    font-size: 0.62rem !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+  .yt-video-stats {
+    font-size: 0.56rem !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+  .yt-info-bar {
+    padding: 8px !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+  }
+  .yt-channel-meta {
+    gap: 6px !important;
+    width: 100% !important;
+  }
+  .yt-channel-avatar {
+    width: 24px !important;
+    height: 24px !important;
+  }
+  .yt-channel-copy strong {
+    font-size: 0.68rem !important;
+  }
+  .yt-channel-copy small {
+    font-size: 0.56rem !important;
+  }
+  .yt-action-buttons {
+    width: 100% !important;
+    display: grid !important;
+    grid-template-columns: 1.1fr 1fr 1fr !important;
+    gap: 5px !important;
+    box-sizing: border-box !important;
+  }
+  .yt-subscribe-btn,
+  .yt-channel-action-btn {
+    padding: 6px 4px !important;
+    font-size: 0.64rem !important;
+    font-weight: 700 !important;
+    width: 100% !important;
+    text-align: center !important;
+    justify-content: center !important;
+    border-radius: 8px !important;
+    box-sizing: border-box !important;
+    white-space: nowrap !important;
+  }
+  .yt-playlist-strip {
+    padding: 5px 6px !important;
+    gap: 5px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .yt-playlist-item {
+    font-size: 0.6rem !important;
+    padding: 3px 7px !important;
+    max-width: 180px !important;
   }
   .hero-visual-footer-bar {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 6px !important;
+    padding: 7px 10px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .hero-footer-left {
+    justify-content: center !important;
+    font-size: 0.68rem !important;
+    text-align: center !important;
   }
   .hero-footer-links {
-    width: 100%;
-    justify-content: space-between;
+    width: 100% !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 6px !important;
   }
   .hero-footer-link {
-    flex: 1;
-    text-align: center;
+    text-align: center !important;
+    padding: 6px !important;
+    font-size: 0.64rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 }
 
 @media (max-width: 480px) {
   .hero-grid {
-    padding-block: 28px;
+    padding-block: 20px !important;
+    gap: 24px !important;
   }
-  .hero-visual {
-    min-height: 280px;
+  .hero-visual.auto-device-screen {
+    min-height: 0 !important;
   }
-  .yt-watch-direct-btn span {
-    display: none;
+  .yt-window-dots {
+    display: none !important;
   }
-  .yt-watch-direct-btn::after {
-    content: "Watch ↗";
+  .yt-device-bar {
+    height: 32px !important;
+    padding: 0 6px !important;
   }
-  .yt-top-channel-btn span {
-    display: none;
+  .yt-brand-text {
+    font-size: 0.72rem !important;
   }
-  .yt-top-channel-btn::after {
-    content: "Channel ↗";
+  .yt-mock-controls {
+    display: none !important;
   }
-  .view-mode-both .yt-mobile-frame {
-    width: 105px !important;
-    right: -6px !important;
-    bottom: -8px !important;
+  .yt-poster-bottom {
+    margin-bottom: 6px !important;
+  }
+  .yt-video-stats {
+    display: none !important;
+  }
+  .yt-play-hint {
+    display: none !important;
+  }
+  .yt-action-buttons {
+    grid-template-columns: 1fr 1fr 1fr !important;
+    gap: 4px !important;
+  }
+  .yt-subscribe-btn,
+  .yt-channel-action-btn {
+    font-size: 0.6rem !important;
+    padding: 5px 2px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .yt-action-buttons {
+    grid-template-columns: 1fr !important;
+  }
+  .yt-top-channel-btn {
+    display: none !important;
   }
 }
 

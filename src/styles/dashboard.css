@@ -225,7 +225,7 @@
   .member-dashboard-wrapper .side-link .ico{width:30px}
   .member-dashboard-wrapper .sidebar.is-expanded{width:var(--sidebar-expanded)}
   .member-dashboard-wrapper .sidebar.is-expanded .brand-copy, .member-dashboard-wrapper .sidebar.is-expanded .label, .member-dashboard-wrapper .sidebar.is-expanded .sidebar-footer{display:block}
-  .member-dashboard-wrapper .sidebar.is-expanded .brand-mark, .member-dashboard-wrapper .sidebar.is-expanded .sidebar-logo-img{display:block}
+  .member-dashboard-wrapper .sidebar-brand .sidebar-logo-img{display:none !important}
   .member-dashboard-wrapper .sidebar.is-expanded .sidebar-brand{justify-content:flex-start;padding:12px}
   .member-dashboard-wrapper .sidebar.is-expanded .side-link{justify-content:flex-start;padding-inline:12px}
   .member-dashboard-wrapper .app-main{margin-left:var(--sidebar-collapsed);transition:margin-left .22s ease}
